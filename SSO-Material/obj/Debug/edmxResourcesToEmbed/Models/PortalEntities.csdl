@@ -1,0 +1,971 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PortalEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="SP_FORGETCARD_GETALL" ReturnType="Collection(PortalModel.SP_FORGETCARD_GETALL_Result)">
+      <Parameter Name="DEPTID" Mode="In" Type="Int32" />
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="EMPNAME" Mode="In" Type="String" />
+      <Parameter Name="POSITION" Mode="In" Type="String" />
+      <Parameter Name="JOBTITLE" Mode="In" Type="String" />
+      <Parameter Name="FROMDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="TODATE" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="ForgetCard" EntityType="PortalModel.ForgetCard" />
+    <FunctionImport Name="SP_FORGETCARD_DELETE">
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="WORKDATE" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_FORGETCARD_GETINFOR" ReturnType="Collection(PortalModel.SP_FORGETCARD_GETINFOR_Result)">
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="WORKDATE" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="SysCategory" EntityType="PortalModel.SysCategory" />
+    <EntitySet Name="SysCategoryValue" EntityType="PortalModel.SysCategoryValue" />
+    <AssociationSet Name="FK_Category_SysCategory_ID" Association="PortalModel.FK_Category_SysCategory_ID">
+      <End Role="SysCategory" EntitySet="SysCategory" />
+      <End Role="SysCategoryValue" EntitySet="SysCategoryValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ParentID_ID" Association="PortalModel.FK_ParentID_ID">
+      <End Role="SysCategoryValue" EntitySet="SysCategoryValue" />
+      <End Role="SysCategoryValue1" EntitySet="SysCategoryValue" />
+    </AssociationSet>
+    <EntitySet Name="HrDeptMaster" EntityType="PortalModel.HrDeptMaster" />
+    <AssociationSet Name="FK_HrDeptMaster_HrDeptMaster" Association="PortalModel.FK_HrDeptMaster_HrDeptMaster">
+      <End Role="HrDeptMaster" EntitySet="HrDeptMaster" />
+      <End Role="HrDeptMaster1" EntitySet="HrDeptMaster" />
+    </AssociationSet>
+    <EntitySet Name="HrEmpMaster" EntityType="PortalModel.HrEmpMaster" />
+    <AssociationSet Name="FK_CreateUid_HrEmpMaster" Association="PortalModel.FK_CreateUid_HrEmpMaster">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="SysCategory" EntitySet="SysCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreateUid_HrEmpMaster_EmpId" Association="PortalModel.FK_CreateUid_HrEmpMaster_EmpId">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="SysCategoryValue" EntitySet="SysCategoryValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeleteUid_HrEmpMaster_EmpId" Association="PortalModel.FK_DeleteUid_HrEmpMaster_EmpId">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="SysCategoryValue" EntitySet="SysCategoryValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysCategory_DeleteUid_HrEmpMaster_EmpId" Association="PortalModel.FK_SysCategory_DeleteUid_HrEmpMaster_EmpId">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="SysCategory" EntitySet="SysCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysCategory_UpdateUid_HrEmpMaster_EmpId" Association="PortalModel.FK_SysCategory_UpdateUid_HrEmpMaster_EmpId">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="SysCategory" EntitySet="SysCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UpdateUid_HrEmpMaster_EmpId" Association="PortalModel.FK_UpdateUid_HrEmpMaster_EmpId">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="SysCategoryValue" EntitySet="SysCategoryValue" />
+    </AssociationSet>
+    <EntitySet Name="SysLogHistory" EntityType="PortalModel.SysLogHistory" />
+    <FunctionImport Name="SP_SYS_LOG_HISTORY" ReturnType="Collection(PortalModel.SP_SYS_LOG_HISTORY_Result)">
+      <Parameter Name="SUBJECT" Mode="In" Type="String" />
+      <Parameter Name="DEPTID" Mode="In" Type="Int32" />
+      <Parameter Name="DATEFROM" Mode="In" Type="DateTime" />
+      <Parameter Name="DATETO" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SYS_GET_LOG_BY_DEPTID" ReturnType="Collection(PortalModel.SP_SYS_GET_LOG_BY_DEPTID_Result)">
+      <Parameter Name="DEPTID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="HrDeptMasterFull" EntityType="PortalModel.HrDeptMasterFull" />
+    <FunctionImport Name="SP_SYS_DEPT_GET_TREE" ReturnType="Collection(PortalModel.SP_SYS_DEPT_GET_TREE_Result)">
+      <Parameter Name="DEPTID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SYS_GET_MAIL_GROUP" ReturnType="Collection(PortalModel.SP_SYS_GET_MAIL_GROUP_Result)">
+      <Parameter Name="DEPTID" Mode="In" Type="Int32" />
+      <Parameter Name="DEPTNAME" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SYS_MAIL_LIST" ReturnType="Collection(PortalModel.SP_SYS_MAIL_LIST_Result)">
+      <Parameter Name="SEARCHTYPE" Mode="In" Type="Int32" />
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="EMPNAME" Mode="In" Type="String" />
+      <Parameter Name="SEX" Mode="In" Type="String" />
+      <Parameter Name="NATION" Mode="In" Type="String" />
+      <Parameter Name="DEPTID" Mode="In" Type="Int32" />
+      <Parameter Name="HASEMAIL" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="SP_EMPLOYEE_INFOR" ReturnType="Collection(PortalModel.SP_EMPLOYEE_INFOR_Result)">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SYS_USER_LOGIN" ReturnType="Collection(PortalModel.SP_SYS_USER_LOGIN_Result)">
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="PASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_FORGETCARD_UPDATE">
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="WORKDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="TIMEIN" Mode="In" Type="String" />
+      <Parameter Name="TIMEOUT" Mode="In" Type="String" />
+      <Parameter Name="SECURITYNAME" Mode="In" Type="String" />
+      <Parameter Name="TEMPORATYCARD" Mode="In" Type="String" />
+      <Parameter Name="GATENUMBER" Mode="In" Type="String" />
+      <Parameter Name="REASON" Mode="In" Type="String" />
+      <Parameter Name="REASONOTHER" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ApplicationConfig" EntityType="PortalModel.ApplicationConfig" />
+    <AssociationSet Name="FK_ApplicationConfig_HrDeptMaster" Association="PortalModel.FK_ApplicationConfig_HrDeptMaster">
+      <End Role="HrDeptMaster" EntitySet="HrDeptMaster" />
+      <End Role="ApplicationConfig" EntitySet="ApplicationConfig" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationConfig_HrEmpMaster" Association="PortalModel.FK_ApplicationConfig_HrEmpMaster">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="ApplicationConfig" EntitySet="ApplicationConfig" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationConfig_HrEmpMaster1" Association="PortalModel.FK_ApplicationConfig_HrEmpMaster1">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="ApplicationConfig" EntitySet="ApplicationConfig" />
+    </AssociationSet>
+    <FunctionImport Name="SP_APPLICATION_CONFIG_GETALL" ReturnType="Collection(PortalModel.SP_APPLICATION_CONFIG_GETALL_Result)">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="DeptId" Mode="In" Type="Int32" />
+      <Parameter Name="Kind" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_APPLICATION_CONFIG_GETLIST" ReturnType="Collection(PortalModel.SP_APPLICATION_CONFIG_GETLIST_Result)" />
+    <EntitySet Name="SysRole" EntityType="PortalModel.SysRole" />
+    <EntitySet Name="SysRoleMapping" EntityType="PortalModel.SysRoleMapping" />
+    <EntitySet Name="SysUserMapping" EntityType="PortalModel.SysUserMapping" />
+    <AssociationSet Name="FK_SysUserMapping_HrEmpMaster" Association="PortalModel.FK_SysUserMapping_HrEmpMaster">
+      <End Role="HrEmpMaster" EntitySet="HrEmpMaster" />
+      <End Role="SysUserMapping" EntitySet="SysUserMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysRoleMapping_SysRole" Association="PortalModel.FK_SysRoleMapping_SysRole">
+      <End Role="SysRole" EntitySet="SysRole" />
+      <End Role="SysRoleMapping" EntitySet="SysRoleMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUserMapping_SysRole" Association="PortalModel.FK_SysUserMapping_SysRole">
+      <End Role="SysRole" EntitySet="SysRole" />
+      <End Role="SysUserMapping" EntitySet="SysUserMapping" />
+    </AssociationSet>
+    <EntitySet Name="SysAuthorization" EntityType="PortalModel.SysAuthorization" />
+    <EntitySet Name="SysUser" EntityType="PortalModel.SysUser" />
+    <EntitySet Name="Violation" EntityType="PortalModel.Violation" />
+    <EntitySet Name="VisitorApplicationMaster" EntityType="PortalModel.VisitorApplicationMaster" />
+    <EntitySet Name="VisitorCheckDaily" EntityType="PortalModel.VisitorCheckDaily" />
+    <AssociationSet Name="FK_VisitorCheckDaily_VisitorApplicationMaster" Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster">
+      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
+      <End Role="VisitorCheckDaily" EntitySet="VisitorCheckDaily" />
+    </AssociationSet>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_GET" ReturnType="Collection(PortalModel.SP_VISITOR_APPLICATION_MASTER_GET_Result)">
+      <Parameter Name="FROMDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="TODATE" Mode="In" Type="DateTime" />
+      <Parameter Name="APPLICATIONTYPE" Mode="In" Type="String" />
+      <Parameter Name="USERID" Mode="In" Type="String" />
+      <Parameter Name="APPROVESTATUS" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="VisitorApplicationDetail" EntityType="PortalModel.VisitorApplicationDetail" />
+    <AssociationSet Name="FK_VisitorApplicationDetail_VisitorApplicationMaster" Association="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster">
+      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
+      <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VisitorCheckDaily_VisitorApplicationDetail" Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail">
+      <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />
+      <End Role="VisitorCheckDaily" EntitySet="VisitorCheckDaily" />
+    </AssociationSet>
+    <FunctionImport Name="SP_VENDOR_DELETE">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VENDOR_INSERT">
+      <Parameter Name="CompanyName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="DeptId" Mode="In" Type="Int32" />
+      <Parameter Name="PersonInCharge" Mode="In" Type="String" />
+      <Parameter Name="ContactPerson" Mode="In" Type="String" />
+      <Parameter Name="IdentityCard" Mode="In" Type="String" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VENDOR_UPDATE">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="CompanyName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="DeptId" Mode="In" Type="Int32" />
+      <Parameter Name="PersonInCharge" Mode="In" Type="String" />
+      <Parameter Name="ContactPerson" Mode="In" Type="String" />
+      <Parameter Name="IdentityCard" Mode="In" Type="String" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Active" Mode="In" Type="Boolean" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SYS_USER_LIST" ReturnType="Collection(PortalModel.SP_SYS_USER_LIST_Result)">
+      <Parameter Name="SEARCHTYPE" Mode="In" Type="Int32" />
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="EMPNAME" Mode="In" Type="String" />
+      <Parameter Name="DEPTID" Mode="In" Type="Int32" />
+      <Parameter Name="SEX" Mode="In" Type="String" />
+      <Parameter Name="NATION" Mode="In" Type="String" />
+      <Parameter Name="HASEMAIL" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VENDOR_GET" ReturnType="Collection(PortalModel.SP_VENDOR_GET_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="EMPID" Mode="In" Type="String" />
+      <Parameter Name="FROMDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="TODATE" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="SP_FORGETCARD_GETALL_Result">
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Posistion" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="EmpId" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmpName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="ForGetDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="TimeIn" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="TimeOut" Nullable="false" MaxLength="5" />
+    <Property Type="DateTime" Name="WorkDate" Nullable="true" />
+    <Property Type="String" Name="ReasonName" Nullable="false" MaxLength="500" />
+  </ComplexType>
+  <EntityType Name="ForgetCard">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="WorkDate" Type="DateTime" Precision="0" />
+    <Property Name="TimeIn" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="TimeOut" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="SecurityName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="ReasonDelete" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityDelete" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TemporaryCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="GateId" Type="Guid" Nullable="false" />
+    <Property Name="Reason" Type="Guid" />
+    <Property Name="ReasonOthers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="SP_FORGETCARD_GETINFOR_Result">
+    <Property Type="String" Name="EmpId" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmpName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Posistion" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="JOINDATE" Nullable="true" MaxLength="10" />
+    <Property Type="Binary" Name="Img" Nullable="true" />
+    <Property Type="String" Name="DeptFullName" Nullable="true" MaxLength="809" />
+    <Property Type="Int32" Name="DeptId" Nullable="true" />
+    <Property Type="String" Name="TimeIn" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="TimeOut" Nullable="false" MaxLength="5" />
+    <Property Type="DateTime" Name="WorkDate" Nullable="true" />
+    <Property Type="String" Name="SecurityName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TemporaryCard" Nullable="true" MaxLength="20" />
+    <Property Type="Guid" Name="GateId" Nullable="true" />
+    <Property Type="String" Name="GateName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Reason" Nullable="true" MaxLength="36" />
+    <Property Type="String" Name="ReasonOthers" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="ReasonName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="DeptNamePrint" Nullable="false" MaxLength="606" />
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="Organization" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="SysCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SysCategoryValue" Relationship="PortalModel.FK_Category_SysCategory_ID" FromRole="SysCategory" ToRole="SysCategoryValue" />
+    <NavigationProperty Name="HrEmpMaster" Relationship="PortalModel.FK_CreateUid_HrEmpMaster" FromRole="SysCategory" ToRole="HrEmpMaster" />
+    <NavigationProperty Name="HrEmpMaster1" Relationship="PortalModel.FK_SysCategory_DeleteUid_HrEmpMaster_EmpId" FromRole="SysCategory" ToRole="HrEmpMaster" />
+    <NavigationProperty Name="HrEmpMaster2" Relationship="PortalModel.FK_SysCategory_UpdateUid_HrEmpMaster_EmpId" FromRole="SysCategory" ToRole="HrEmpMaster" />
+  </EntityType>
+  <EntityType Name="SysCategoryValue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Dictionary" Type="Guid" />
+    <Property Name="Sequence" Type="Byte" />
+    <Property Name="Actived" Type="Boolean" Nullable="false" />
+    <Property Name="Category" Type="Guid" Nullable="false" />
+    <Property Name="ParentID" Type="Guid" />
+    <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="SubCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SysCategory" Relationship="PortalModel.FK_Category_SysCategory_ID" FromRole="SysCategoryValue" ToRole="SysCategory" />
+    <NavigationProperty Name="SysCategoryValue1" Relationship="PortalModel.FK_ParentID_ID" FromRole="SysCategoryValue" ToRole="SysCategoryValue1" />
+    <NavigationProperty Name="SysCategoryValue2" Relationship="PortalModel.FK_ParentID_ID" FromRole="SysCategoryValue1" ToRole="SysCategoryValue" />
+    <NavigationProperty Name="HrEmpMaster" Relationship="PortalModel.FK_CreateUid_HrEmpMaster_EmpId" FromRole="SysCategoryValue" ToRole="HrEmpMaster" />
+    <NavigationProperty Name="HrEmpMaster1" Relationship="PortalModel.FK_DeleteUid_HrEmpMaster_EmpId" FromRole="SysCategoryValue" ToRole="HrEmpMaster" />
+    <NavigationProperty Name="HrEmpMaster2" Relationship="PortalModel.FK_UpdateUid_HrEmpMaster_EmpId" FromRole="SysCategoryValue" ToRole="HrEmpMaster" />
+  </EntityType>
+  <Association Name="FK_Category_SysCategory_ID">
+    <End Type="PortalModel.SysCategory" Role="SysCategory" Multiplicity="1" />
+    <End Type="PortalModel.SysCategoryValue" Role="SysCategoryValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysCategory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SysCategoryValue">
+        <PropertyRef Name="Category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ParentID_ID">
+    <End Type="PortalModel.SysCategoryValue" Role="SysCategoryValue" Multiplicity="0..1" />
+    <End Type="PortalModel.SysCategoryValue" Role="SysCategoryValue1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysCategoryValue">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SysCategoryValue1">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HrDeptMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EnName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="KoName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Parent" Type="Int32" />
+    <Property Name="ParentCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HrDeptMaster1" Relationship="PortalModel.FK_HrDeptMaster_HrDeptMaster" FromRole="HrDeptMaster" ToRole="HrDeptMaster1" />
+    <NavigationProperty Name="HrDeptMaster2" Relationship="PortalModel.FK_HrDeptMaster_HrDeptMaster" FromRole="HrDeptMaster1" ToRole="HrDeptMaster" />
+    <NavigationProperty Name="ApplicationConfig" Relationship="PortalModel.FK_ApplicationConfig_HrDeptMaster" FromRole="HrDeptMaster" ToRole="ApplicationConfig" />
+  </EntityType>
+  <Association Name="FK_HrDeptMaster_HrDeptMaster">
+    <End Type="PortalModel.HrDeptMaster" Role="HrDeptMaster" Multiplicity="0..1" />
+    <End Type="PortalModel.HrDeptMaster" Role="HrDeptMaster1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrDeptMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrDeptMaster1">
+        <PropertyRef Name="Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HrEmpMaster">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LocalName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="KoName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="EnName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Nation" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="PositionId" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="DeptCode" Type="Int32" Nullable="false" />
+    <Property Name="Img" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="WorkGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Temp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="FactoryId" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="uStatus" Type="Guid" Nullable="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="InterfaceDate" Type="DateTime" Precision="3" />
+    <Property Name="ActiveDate" Type="DateTime" Precision="3" />
+    <Property Name="Costcenter" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="JobTitleId" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="JoinDate" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SysCategory" Relationship="PortalModel.FK_CreateUid_HrEmpMaster" FromRole="HrEmpMaster" ToRole="SysCategory" />
+    <NavigationProperty Name="SysCategoryValue" Relationship="PortalModel.FK_CreateUid_HrEmpMaster_EmpId" FromRole="HrEmpMaster" ToRole="SysCategoryValue" />
+    <NavigationProperty Name="SysCategoryValue1" Relationship="PortalModel.FK_DeleteUid_HrEmpMaster_EmpId" FromRole="HrEmpMaster" ToRole="SysCategoryValue" />
+    <NavigationProperty Name="SysCategory1" Relationship="PortalModel.FK_SysCategory_DeleteUid_HrEmpMaster_EmpId" FromRole="HrEmpMaster" ToRole="SysCategory" />
+    <NavigationProperty Name="SysCategory2" Relationship="PortalModel.FK_SysCategory_UpdateUid_HrEmpMaster_EmpId" FromRole="HrEmpMaster" ToRole="SysCategory" />
+    <NavigationProperty Name="SysCategoryValue2" Relationship="PortalModel.FK_UpdateUid_HrEmpMaster_EmpId" FromRole="HrEmpMaster" ToRole="SysCategoryValue" />
+    <Property Name="UserType" Type="Guid" />
+    <NavigationProperty Name="ApplicationConfig" Relationship="PortalModel.FK_ApplicationConfig_HrEmpMaster" FromRole="HrEmpMaster" ToRole="ApplicationConfig" />
+    <NavigationProperty Name="ApplicationConfig1" Relationship="PortalModel.FK_ApplicationConfig_HrEmpMaster1" FromRole="HrEmpMaster" ToRole="ApplicationConfig" />
+    <NavigationProperty Name="SysUserMapping" Relationship="PortalModel.FK_SysUserMapping_HrEmpMaster" FromRole="HrEmpMaster" ToRole="SysUserMapping" />
+  </EntityType>
+  <Association Name="FK_CreateUid_HrEmpMaster">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="1" />
+    <End Type="PortalModel.SysCategory" Role="SysCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="SysCategory">
+        <PropertyRef Name="CreateUid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreateUid_HrEmpMaster_EmpId">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="1" />
+    <End Type="PortalModel.SysCategoryValue" Role="SysCategoryValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="SysCategoryValue">
+        <PropertyRef Name="CreateUid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeleteUid_HrEmpMaster_EmpId">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="0..1" />
+    <End Type="PortalModel.SysCategoryValue" Role="SysCategoryValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="SysCategoryValue">
+        <PropertyRef Name="DeleteUid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysCategory_DeleteUid_HrEmpMaster_EmpId">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="0..1" />
+    <End Type="PortalModel.SysCategory" Role="SysCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="SysCategory">
+        <PropertyRef Name="DeleteUid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysCategory_UpdateUid_HrEmpMaster_EmpId">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="0..1" />
+    <End Type="PortalModel.SysCategory" Role="SysCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="SysCategory">
+        <PropertyRef Name="UpdateUid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UpdateUid_HrEmpMaster_EmpId">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="0..1" />
+    <End Type="PortalModel.SysCategoryValue" Role="SysCategoryValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="SysCategoryValue">
+        <PropertyRef Name="UpdateUid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SysLogHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IpAddress" Type="Int32" />
+    <Property Name="LogTime" Type="DateTime" Precision="3" />
+    <Property Name="OperatingSystem" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PcName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PcBrowser" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ControllerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ActionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="SP_SYS_LOG_HISTORY_Result">
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LocalName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="LogTime" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IpAddress" Nullable="true" />
+    <Property Type="String" Name="PcBrowser" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="SP_SYS_GET_LOG_BY_DEPTID_Result">
+    <Property Type="String" Name="LocalName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="LogTime" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IpAddress" Nullable="true" />
+    <Property Type="String" Name="UserId" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <EntityType Name="HrDeptMasterFull">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EnName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="KoName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Organization" Type="Int32" />
+    <Property Name="Plant" Type="Int32" />
+    <Property Name="Dept" Type="Int32" />
+    <Property Name="Sect" Type="Int32" />
+    <Property Name="OrganizationName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PlantName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DeptName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SectName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Level" Type="Int32" />
+    <Property Name="CostCenter" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="SP_SYS_DEPT_GET_TREE_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="String" Name="NAME" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="KONAME" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="PARENTID" Nullable="true" />
+    <Property Type="Int32" Name="LEVEL" Nullable="true" />
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="SP_SYS_GET_MAIL_GROUP_Result">
+    <Property Type="String" Name="NAME" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="MAILGROUP" Nullable="true" MaxLength="24" />
+    <Property Type="String" Name="KONAME" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="SP_SYS_MAIL_LIST_Result">
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="LocalName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="SP_EMPLOYEE_INFOR_Result">
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="LocalName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="809" />
+    <Property Type="Int32" Name="DeptId" Nullable="true" />
+    <Property Type="String" Name="Costcenter" Nullable="true" MaxLength="9" />
+  </ComplexType>
+  <ComplexType Name="SP_SYS_USER_LOGIN_Result">
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="LocalName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="EmpId" Nullable="false" MaxLength="20" />
+    <Property Type="Binary" Name="Img" Nullable="true" />
+    <Property Type="Int32" Name="DeptCode" Nullable="false" />
+    <Property Type="Guid" Name="uStatus" Nullable="false" />
+    <Property Type="String" Name="RoleId" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="RoleName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PositionName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="JoinDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="DeptFullName" Nullable="true" MaxLength="809" />
+  </ComplexType>
+  <EntityType Name="ApplicationConfig">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="DeptId" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalKind" Type="Guid" />
+    <Property Name="ApprovalLineDefault" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalLineJson" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateUId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HrDeptMaster" Relationship="PortalModel.FK_ApplicationConfig_HrDeptMaster" FromRole="ApplicationConfig" ToRole="HrDeptMaster" />
+    <NavigationProperty Name="HrEmpMaster" Relationship="PortalModel.FK_ApplicationConfig_HrEmpMaster" FromRole="ApplicationConfig" ToRole="HrEmpMaster" />
+    <NavigationProperty Name="HrEmpMaster1" Relationship="PortalModel.FK_ApplicationConfig_HrEmpMaster1" FromRole="ApplicationConfig" ToRole="HrEmpMaster" />
+  </EntityType>
+  <Association Name="FK_ApplicationConfig_HrDeptMaster">
+    <End Type="PortalModel.HrDeptMaster" Role="HrDeptMaster" Multiplicity="0..1" />
+    <End Type="PortalModel.ApplicationConfig" Role="ApplicationConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrDeptMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ApplicationConfig">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationConfig_HrEmpMaster">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="1" />
+    <End Type="PortalModel.ApplicationConfig" Role="ApplicationConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="ApplicationConfig">
+        <PropertyRef Name="CreateUid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationConfig_HrEmpMaster1">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="0..1" />
+    <End Type="PortalModel.ApplicationConfig" Role="ApplicationConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="ApplicationConfig">
+        <PropertyRef Name="UpdateUId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_APPLICATION_CONFIG_GETALL_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="809" />
+    <Property Type="Int32" Name="DeptId" Nullable="true" />
+    <Property Type="String" Name="ApprovalLineName" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="ApprovalLineJson" Nullable="false" MaxLength="4000" />
+    <Property Type="String" Name="ApprovalLineDefault" Nullable="false" MaxLength="2000" />
+    <Property Type="String" Name="CreateUid" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="CreateName" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+    <Property Type="Guid" Name="ApprovalKind" Nullable="true" />
+    <Property Type="String" Name="KindName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="SP_APPLICATION_CONFIG_GETLIST_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="String" Name="NAME" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="PARENTID" Nullable="true" />
+    <Property Type="String" Name="CODE" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <EntityType Name="SysRole">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SystemId" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreateUser" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+    <Property Name="DeleteUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <NavigationProperty Name="SysRoleMapping" Relationship="PortalModel.FK_SysRoleMapping_SysRole" FromRole="SysRole" ToRole="SysRoleMapping" />
+    <NavigationProperty Name="SysUserMapping" Relationship="PortalModel.FK_SysUserMapping_SysRole" FromRole="SysRole" ToRole="SysUserMapping" />
+  </EntityType>
+  <EntityType Name="SysRoleMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="MenuId" Type="Int32" />
+    <Property Name="ControllerId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ActionId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ActionName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IsAllow" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SysRole" Relationship="PortalModel.FK_SysRoleMapping_SysRole" FromRole="SysRoleMapping" ToRole="SysRole" />
+  </EntityType>
+  <EntityType Name="SysUserMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="HrEmpMaster" Relationship="PortalModel.FK_SysUserMapping_HrEmpMaster" FromRole="SysUserMapping" ToRole="HrEmpMaster" />
+    <NavigationProperty Name="SysRole" Relationship="PortalModel.FK_SysUserMapping_SysRole" FromRole="SysUserMapping" ToRole="SysRole" />
+  </EntityType>
+  <Association Name="FK_SysUserMapping_HrEmpMaster">
+    <End Type="PortalModel.HrEmpMaster" Role="HrEmpMaster" Multiplicity="1" />
+    <End Type="PortalModel.SysUserMapping" Role="SysUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrEmpMaster">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="SysUserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysRoleMapping_SysRole">
+    <End Type="PortalModel.SysRole" Role="SysRole" Multiplicity="1" />
+    <End Type="PortalModel.SysRoleMapping" Role="SysRoleMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysRole">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="SysRoleMapping">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUserMapping_SysRole">
+    <End Type="PortalModel.SysRole" Role="SysRole" Multiplicity="1" />
+    <End Type="PortalModel.SysUserMapping" Role="SysUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysRole">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="SysUserMapping">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SysAuthorization">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Action" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Controller" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IsAllowed" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Owner" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SysUser">
+    <Key>
+      <PropertyRef Name="LoginID" />
+    </Key>
+    <Property Name="LoginID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IMG" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Actived" Type="Boolean" Nullable="false" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Deleted" Type="Boolean" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Violation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdentifyNum" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Violatedate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ViolateType" Type="Guid" Nullable="false" />
+    <Property Name="ReasonDetail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsBlackList" Type="Boolean" Nullable="false" />
+    <Property Name="AttachId" Type="Int32" />
+    <Property Name="ApprovalKind" Type="Guid" Nullable="false" />
+    <Property Name="ApprovalLine" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalLineJson" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalStatus" Type="Guid" Nullable="false" />
+    <Property Name="NextApprover" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateUId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VisitorApplicationMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Applicant" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ApplicationType" Type="Guid" Nullable="false" />
+    <Property Name="Vendor" Type="Int32" Nullable="false" />
+    <Property Name="Purpose" Type="Guid" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gate" Type="Guid" Nullable="false" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="LocationOther" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalKind" Type="Guid" Nullable="false" />
+    <Property Name="ApprovalLine" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalLineJson" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalStatus" Type="Guid" Nullable="false" />
+    <Property Name="NextApprover" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateUId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="VisitorCheckDaily" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster" FromRole="VisitorApplicationMaster" ToRole="VisitorCheckDaily" />
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="HandPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="VisitorApplicationDetail" Relationship="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster" FromRole="VisitorApplicationMaster" ToRole="VisitorApplicationDetail" />
+  </EntityType>
+  <EntityType Name="VisitorCheckDaily">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicationMaster" Type="Int32" Nullable="false" />
+    <Property Name="ApplicationDetail" Type="Int32" Nullable="false" />
+    <Property Name="WorkDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TimeIn" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="TimeOut" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="HasVehicle" Type="Boolean" Nullable="false" />
+    <Property Name="VehiclePlate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="VisitorApplicationMaster" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster" FromRole="VisitorCheckDaily" ToRole="VisitorApplicationMaster" />
+    <NavigationProperty Name="VisitorApplicationDetail" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail" FromRole="VisitorCheckDaily" ToRole="VisitorApplicationDetail" />
+  </EntityType>
+  <Association Name="FK_VisitorCheckDaily_VisitorApplicationMaster">
+    <End Type="PortalModel.VisitorApplicationMaster" Role="VisitorApplicationMaster" Multiplicity="1" />
+    <End Type="PortalModel.VisitorCheckDaily" Role="VisitorCheckDaily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitorApplicationMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorCheckDaily">
+        <PropertyRef Name="ApplicationMaster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_VISITOR_APPLICATION_MASTER_GET_Result">
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="Vendor" Nullable="false" />
+    <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Applicant" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ApplicantName" Nullable="true" MaxLength="255" />
+    <Property Type="Guid" Name="Purpose" Nullable="false" />
+    <Property Type="String" Name="PurposeName" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="Gate" Nullable="false" />
+    <Property Type="String" Name="GateName" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="ApplicationType" Nullable="false" />
+    <Property Type="String" Name="ApplicationTypeName" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="LocationName" Nullable="true" />
+    <Property Type="Guid" Name="ApprovalKind" Nullable="false" />
+    <Property Type="String" Name="KindName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="ApprovalLineJson" Nullable="false" MaxLength="4000" />
+    <Property Type="String" Name="ApprovalLine" Nullable="false" MaxLength="2000" />
+    <Property Type="String" Name="ApprovalStatusName" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="ApprovalStatus" Nullable="false" />
+    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="LocationOther" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ContactPhoneNumber" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="HandPhoneNumber" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <EntityType Name="VisitorApplicationDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicationMaster" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IdentifyNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TemporaryCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DriverPlate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="VehicleType" Type="Guid" />
+    <Property Name="IsContactPerson" Type="Boolean" Nullable="false" />
+    <Property Name="IsWorkHourOfficial" Type="Boolean" />
+    <NavigationProperty Name="VisitorApplicationMaster" Relationship="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster" FromRole="VisitorApplicationDetail" ToRole="VisitorApplicationMaster" />
+    <NavigationProperty Name="VisitorCheckDaily" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail" FromRole="VisitorApplicationDetail" ToRole="VisitorCheckDaily" />
+  </EntityType>
+  <Association Name="FK_VisitorApplicationDetail_VisitorApplicationMaster">
+    <End Type="PortalModel.VisitorApplicationMaster" Role="VisitorApplicationMaster" Multiplicity="1" />
+    <End Type="PortalModel.VisitorApplicationDetail" Role="VisitorApplicationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitorApplicationMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorApplicationDetail">
+        <PropertyRef Name="ApplicationMaster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VisitorCheckDaily_VisitorApplicationDetail">
+    <End Type="PortalModel.VisitorApplicationDetail" Role="VisitorApplicationDetail" Multiplicity="1" />
+    <End Type="PortalModel.VisitorCheckDaily" Role="VisitorCheckDaily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitorApplicationDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorCheckDaily">
+        <PropertyRef Name="ApplicationDetail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_SYS_USER_LIST_Result">
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="LocalName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="NAME" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="Costcenter" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="DeptFullName" Nullable="true" MaxLength="809" />
+    <Property Type="Int32" Name="DeptId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_VENDOR_GET_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+    <Property Type="Int32" Name="DeptId" Nullable="false" />
+    <Property Type="String" Name="PersonInCharge" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="IdentityCard" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="70" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="String" Name="CreateUid" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="CreateName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="PersonInChargeName" Nullable="true" MaxLength="255" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,242 @@
+﻿
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Visitor's Information</h4>
+        <input type="hidden" id="hdfMdVisitorFormAction" value="@ViewBag.Action" />
+    </div>
+    <div class="modal-body">
+        <form id="frmMdVisitorInfor" role="form" class="form form-validate card card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm change-data" id="txtMdVisitorFullName" maxlength="200" required>
+                        <label for="txtMdVisitorFullName">Name</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm change-data" id="txtMdVisitorIdentityCard" maxlength="15" data-rule-number="true" required>
+                        <label for="txtMdVisitorIdentityCard">Identity Card</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm change-data" id="txtMdVisitorTemporaryCard" maxlength="20" required>
+                        <label for="txtMdVisitorTemporaryCard">Temporary Card</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm change-data" id="txtMdVisitorPhone" maxlength="15" data-rule-number="true" required>
+                        <label for="txtMdVisitorPhone">Phone</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-daterange input-group" id="txtMdVisitorVisitDateRange">
+                        <div class="form-group" style="padding:0">
+                            <div class="input-group-content">
+                                <input type="text" class="form-control input-sm input-date" name="start" required />
+                                <label>Visit Date</label>
+                            </div>
+                            <span class="input-group-addon">to</span>
+                            <div class="input-group-content">
+                                <input type="text" class="form-control input-sm input-date" name="end" required />
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select id="cbMdVisitorVehicleType" class="form-control input-sm">
+                            <option value="">&nbsp;</option>
+                        </select>
+                        <label for="cbMdVisitorVehicleType">Vehicle Type</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm change-data" id="txtMdVendorDriverPlate" maxlength="20" required>
+                        <label for="txtMdVendorDriverPlate">Driver Plate</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="checkbox checkbox-styled">
+                            <label>
+                                <input id="cbMdVisitorIsWorkOfficial" type="checkbox" checked>
+                                <span>Work Time Official(08:00 - 17:00)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <div class="form-group" style="float:left; margin-bottom:0px">
+            <div class="checkbox checkbox-styled">
+                <label>
+                    <input id="cbMdVisitorContinuous" type="checkbox" checked>
+                    <span>Continuous</span>
+                </label>
+            </div>
+        </div>
+        <button id="btnMdVisitorSave" type="submit" class="btn btn-primary submit">Save</button>        
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+</div><!-- /.modal-content -->
+
+<script type="text/javascript">
+    (function (namespace, $) {
+        "use strict";
+
+        var _entity = {
+            Id: 0, ApplicationMaster: 0, Image: "", FullName: "", IdentityCard: "", TemporaryCard: "", PhoneNumber: "",
+            FromDate: "", ToDate: "", DriverPlate: "", VehicleType: "", VehicleTypeName: "", IsWorkHourOfficial: true
+        };
+
+        var FormVisitorInfor = function () {
+            // Create reference to this instance
+            var o = this;
+            // Initialize app when document is ready
+            $(document).ready(function () {
+                o.initialize();
+            });
+
+            $("#btnMdVisitorSave").on("click", function () {
+                if ($("#frmMdVisitorInfor").valid()) {
+                    o._getData();
+                    o._insertData();
+                }
+
+            })
+        };
+        var p = FormVisitorInfor.prototype;
+
+        // =========================================================================
+        // INIT
+        // =========================================================================
+
+        p.initialize = function () {
+
+            $("#frmMdVisitorInfor").validate();
+
+            $("#txtMdVisitorVisitDateRange").datepicker({
+                autoclose: true,
+                todayHighlight: true, format: _dateFormat,
+                startDate: _applicationMaster.FromDate,
+                endDate: _applicationMaster.ToDate
+            });
+
+            fnGetCateValueViaCateId("AED27DE5-1310-4A02-997B-87A6EF9686BD", false, $("#cbMdVisitorVehicleType"));
+        };
+
+        p._getData = function () {
+            _entity.ApplicationMaster = $("#hdfApplicationMasterId").val();
+            _entity.Image = null;
+            _entity.FullName = $("#txtMdVisitorFullName").val();
+
+            _entity.IdentityCard = $("#txtMdVisitorIdentityCard").val();
+            _entity.TemporaryCard = $("#txtMdVisitorTemporaryCard").val();
+            _entity.PhoneNumber = $("#txtMdVisitorPhone").val();
+
+            var dateRange = $("#txtMdVisitorVisitDateRange").find("input");
+            _entity.FromDate = _isValidDate($(dateRange[0]).val(), _minDate);
+            _entity.ToDate = _isValidDate($(dateRange[1]).val(), _minDate);
+
+            _entity.DriverPlate = $("#txtMdVendorDriverPlate").val();
+            _entity.VehicleType = $("#cbMdVisitorVehicleType").val();
+            _entity.IsWorkHourOfficial = $("#cbMdVisitorIsWorkOfficial").prop("checked");
+        };
+        p._gridVisitorInit = function () {
+            $("#grdVisitorList").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: "/VisitorApplicationMaster/GetDetail?applicationMasterId=" + $("#hdfApplicationMasterId").val(),
+                        create: {
+                            cache: true
+                        }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                FullName: { type: "string", validation: { required: true } },
+                                IdentifyNo: { type: "string", validation: { required: true } },
+                                TemporaryCard: { type: "string" },
+                                PhoneNumber: { type: "string" },
+                                FromDate: { type: "date" },
+                                ToDate: { type: "date" },
+                                DriverPlate: { type: "string" },
+                                VehicleType: { type: "string" },
+                                //IsContactPerson: { type: "boolean" },
+                                IsWorkHourOfficial: { type: "boolean" }
+                            }
+                        }
+                    },
+                    pageSize: 20
+                },
+                //toolbar: ["create"],
+                height: $('footer').position().top - 419,
+                selectable: "row",
+                sortable: true,
+                pageable: true,
+                resizable: true,
+                cache: false,
+                editable: "inline",
+                columns: [
+                    { field: "FullName", title: "Full Name", width: "180px" },
+                    { field: "IdentityCard", title: "Identity Card No", width: "135px" },
+                    { field: "TemporaryCard", title: "Temporary Card", width: "125px" },
+                    { field: "PhoneNumber", title: "Phone Number", width: "140px" },
+                    { field: "FromDate", title: "From Date", width: "105px", format: "{0:yyyy.MM.dd}" },
+                    { field: "ToDate", title: "To Date", width: "105px", format: "{0:yyyy.MM.dd}" },
+                    { field: "VehicleTypeName", title: "Vehicle Type", width: "110px" },
+                    { field: "DriverPlate", title: "Driver Plate", width: "120px" },
+                    //{ field: "IsContactPerson", title: "Contact Person", width: "115px" },
+                    { field: "IsWorkHourOfficial", title: "Work Hour Official", width: "150px" }
+                ]
+
+            });
+        }
+        p._insertData = function () {
+            var o = this;
+            $.ajax({
+                type: "POST",
+                url: "/VisitorApplicationMaster/DetailInsert",
+                data: JSON.stringify({ model: _entity }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (result) {
+                    if (result === "Ok") {
+                        showNotification("Hyosung Portal", "Insert success", "gray success");
+                        o._gridVisitorInit();
+                        if (!$("#cbMdVisitorContinuous").prop("checked"))
+                            $("#mdVisitorInfor").modal("hide");
+                    } else {
+                        showNotification("Hyosung Portal", result, "gray error");
+                    }
+                },
+                error: function (mess) {
+                    console.log(mess);
+                    return false;
+                }
+            });
+        };
+
+
+        // =========================================================================
+        namespace.FormVisitorInfor = new FormVisitorInfor;
+    }(this.materialadmin, jQuery)); // pass in (namespace, jQuery):
+
+
+
+
+</script>

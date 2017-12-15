@@ -280,10 +280,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PortalEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PortalEntities1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortalEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_APPLICATION_CONFIG_GETALL_Result.cs">
       <DependentUpon>PortalEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_APPLICATION_CONFIG_GETLIST_Result.cs">
+      <DependentUpon>PortalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_APPROVAL_HISTORY_Result.cs">
       <DependentUpon>PortalEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_EMPLOYEE_INFOR_Result.cs">
@@ -319,6 +327,18 @@
     <Compile Include="Models\SP_VENDOR_GET_Result.cs">
       <DependentUpon>PortalEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_VISITOR_APPLICATION_DETAIL_GET_Result.cs">
+      <DependentUpon>PortalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_VISITOR_APPLICATION_GET_APPROVAL_Result.cs">
+      <DependentUpon>PortalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY_Result.cs">
+      <DependentUpon>PortalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_VISITOR_APPLICATION_MASTER_GETDETAIL_Result.cs">
+      <DependentUpon>PortalEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_VISITOR_APPLICATION_MASTER_GET_Result.cs">
       <DependentUpon>PortalEntities.tt</DependentUpon>
     </Compile>
@@ -344,6 +364,9 @@
       <DependentUpon>PortalEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SysUserMapping.cs">
+      <DependentUpon>PortalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendor.cs">
       <DependentUpon>PortalEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Violation.cs">
@@ -2231,6 +2254,7 @@
     <Content Include="Content\img\login_left.gif" />
     <Content Include="Content\img\login_right.gif" />
     <Content Include="Content\img\login_top.png" />
+    <Content Include="Content\img\top-bg-5.png" />
     <Content Include="Content\paper.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -2244,7 +2268,7 @@
     <Content Include="Models\PortalEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PortalEntities.edmx</DependentUpon>
-      <LastGenOutput>PortalEntities.cs</LastGenOutput>
+      <LastGenOutput>PortalEntities1.cs</LastGenOutput>
     </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2949,6 +2973,11 @@
     <Content Include="Views\VisitorApplicationMaster\_Vendor.cshtml" />
     <Content Include="Views\VisitorApplicationMaster\_VendorList.cshtml" />
     <Content Include="Views\VisitorApplicationMaster\_VendorView.cshtml" />
+    <Content Include="Views\Common\_ApprovalLine.cshtml" />
+    <Content Include="Views\VisitorApplicationMaster\_VisitorInfor.cshtml" />
+    <Content Include="Views\VisitorApplicationMaster\_VisitorInforView.cshtml" />
+    <Content Include="Views\VisitorApplicationMaster\_ShortTermView.cshtml" />
+    <Content Include="Views\VisitorApplicationMaster\ViewDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

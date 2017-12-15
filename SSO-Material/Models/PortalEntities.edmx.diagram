@@ -34,10 +34,12 @@
         <EntityTypeShape EntityType="PortalModel.SysAuthorization" Width="1.5" PointX="8.375" PointY="5.75" />
         <EntityTypeShape EntityType="PortalModel.SysUser" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="PortalModel.Violation" Width="1.5" PointX="10.375" PointY="5.75" />
-        <EntityTypeShape EntityType="PortalModel.VisitorApplicationMaster" Width="2" PointX="8.375" PointY="10.125" />
         <EntityTypeShape EntityType="PortalModel.VisitorCheckDaily" Width="1.5" PointX="11.625" PointY="11.625" />
+        <EntityTypeShape EntityType="PortalModel.Vendor" Width="1.5" PointX="6.625" PointY="15.375" />
+        <EntityTypeShape EntityType="PortalModel.VisitorApplicationMaster" Width="1.5" PointX="8.875" PointY="12" />
+        <AssociationConnector Association="PortalModel.FK_VisitorApplicationMaster_Vendor" />
         <AssociationConnector Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster" />
-        <EntityTypeShape EntityType="PortalModel.VisitorApplicationDetail" Width="1.5" PointX="11.125" PointY="15.5" />
+        <EntityTypeShape EntityType="PortalModel.VisitorApplicationDetail" Width="1.5" PointX="11.125" PointY="16" />
         <AssociationConnector Association="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster" />
         <AssociationConnector Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail" />
       </Diagram>

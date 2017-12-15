@@ -60,30 +60,30 @@ namespace SSO_Material.Controllers
                 var user = ValidateModel(model);
                 if (user != null)
                 {
-                    var listUser = new List<string> { "vn55160524", "vn55110755", "vn55104017", "vn55104937", "vd52170016", "vd52170006", "vd52170727", "se201701" };
-                    if (listUser.Contains(model.LoginID.ToLower()))
+                    //var listUser = new List<string> { "vn55160524", "vn55110755", "vn55104017", "vn55104937", "vd52170016", "vd52170006", "vd52170727", "se201701" };
+                    //if (listUser.Contains(model.LoginID.ToLower()))
+                    //{
+                    var logHistoryRepo = new LoginHistoryRepository();
+                    var logHistory = new LogHistoryModel()
                     {
-                        var logHistoryRepo = new LoginHistoryRepository();
-                        var logHistory = new LogHistoryModel()
-                        {
-                            UserId = model.LoginID,
-                            PcBrowser = Request.Browser.Browser,
-                            IpAddress = Util.IP2INT(GetIpAddress())
-                        };
-                        logHistoryRepo.InsertLog(logHistory);
+                        UserId = model.LoginID,
+                        PcBrowser = Request.Browser.Browser,
+                        IpAddress = Util.IP2INT(GetIpAddress())
+                    };
+                    logHistoryRepo.InsertLog(logHistory);
 
-                        var status = AppDictionary.UserStatus.FirstOrDefault(a => a.Value == user.Status.ToString()).Key;
-                        if (status == "New" || status == "Reset")
-                        {
-                            ViewBag.Status = "ChangePassword";
-                            return View(model);
-                        }
-                        SetAuthorized(user, model.Remember);
-                        if (Session["CurUrl"] != null)
-                            return Redirect(Session["CurUrl"].ToString());
-                        return RedirectToAction("Index", "Home");
+                    var status = AppDictionary.UserStatus.FirstOrDefault(a => a.Value == user.Status.ToString()).Key;
+                    if (status == "New" || status == "Reset")
+                    {
+                        ViewBag.Status = "ChangePassword";
+                        return View(model);
                     }
-                    ViewBag.ErrorMessage = "You dont have permission to login this system";
+                    SetAuthorized(user, model.Remember);
+                    if (Session["CurUrl"] != null)
+                        return Redirect(Session["CurUrl"].ToString());
+                    return RedirectToAction("Index", "Home");
+                    //}
+                    //ViewBag.ErrorMessage = "You dont have permission to login this system";
                 }
                 ViewBag.ErrorMessage = "Login ID & Password is incorrect!";
 
@@ -118,8 +118,8 @@ namespace SSO_Material.Controllers
             if (model.PasswordNew != model.PasswordRepeat)
                 return Json(new { result = "Error", mess = "The password entered does not match" });
 
-            if(status == "New" || status == "Reset")
-                model.PasswordNew =  ED5Helper.Encrypt(model.PasswordNew);
+            if (status == "New" || status == "Reset")
+                model.PasswordNew = ED5Helper.Encrypt(model.PasswordNew);
 
             var result = repository.ChangePassword(model.LoginID, model.PasswordNew);
             return result ? Json(new { result = "OK" }) : Json(new { result = "Error", mess = "Update fail" });

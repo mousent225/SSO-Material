@@ -144,28 +144,7 @@
     <EntitySet Name="SysAuthorization" EntityType="PortalModel.SysAuthorization" />
     <EntitySet Name="SysUser" EntityType="PortalModel.SysUser" />
     <EntitySet Name="Violation" EntityType="PortalModel.Violation" />
-    <EntitySet Name="VisitorApplicationMaster" EntityType="PortalModel.VisitorApplicationMaster" />
     <EntitySet Name="VisitorCheckDaily" EntityType="PortalModel.VisitorCheckDaily" />
-    <AssociationSet Name="FK_VisitorCheckDaily_VisitorApplicationMaster" Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster">
-      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
-      <End Role="VisitorCheckDaily" EntitySet="VisitorCheckDaily" />
-    </AssociationSet>
-    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_GET" ReturnType="Collection(PortalModel.SP_VISITOR_APPLICATION_MASTER_GET_Result)">
-      <Parameter Name="FROMDATE" Mode="In" Type="DateTime" />
-      <Parameter Name="TODATE" Mode="In" Type="DateTime" />
-      <Parameter Name="APPLICATIONTYPE" Mode="In" Type="String" />
-      <Parameter Name="USERID" Mode="In" Type="String" />
-      <Parameter Name="APPROVESTATUS" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="VisitorApplicationDetail" EntityType="PortalModel.VisitorApplicationDetail" />
-    <AssociationSet Name="FK_VisitorApplicationDetail_VisitorApplicationMaster" Association="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster">
-      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
-      <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_VisitorCheckDaily_VisitorApplicationDetail" Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail">
-      <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />
-      <End Role="VisitorCheckDaily" EntitySet="VisitorCheckDaily" />
-    </AssociationSet>
     <FunctionImport Name="SP_VENDOR_DELETE">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="UserId" Mode="In" Type="String" />
@@ -209,6 +188,147 @@
       <Parameter Name="EMPID" Mode="In" Type="String" />
       <Parameter Name="FROMDATE" Mode="In" Type="DateTime" />
       <Parameter Name="TODATE" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_INSERT" ReturnType="Collection(Decimal)">
+      <Parameter Name="DeptId" Mode="In" Type="Int32" />
+      <Parameter Name="Applicant" Mode="In" Type="String" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="HandPhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="ApplicationType" Mode="In" Type="Int32" />
+      <Parameter Name="Vendor" Mode="In" Type="Int32" />
+      <Parameter Name="Purpose" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Gate" Mode="In" Type="String" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+      <Parameter Name="LocationOther" Mode="In" Type="String" />
+      <Parameter Name="Remarke" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_UPDATE">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="DeptId" Mode="In" Type="Int32" />
+      <Parameter Name="Applicant" Mode="In" Type="String" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="HandPhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="ApplicationType" Mode="In" Type="Int32" />
+      <Parameter Name="Vendor" Mode="In" Type="Int32" />
+      <Parameter Name="Purpose" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Gate" Mode="In" Type="String" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+      <Parameter Name="LocationOther" Mode="In" Type="String" />
+      <Parameter Name="Remarke" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Vendor" EntityType="PortalModel.Vendor" />
+    <EntitySet Name="VisitorApplicationMaster" EntityType="PortalModel.VisitorApplicationMaster" />
+    <AssociationSet Name="FK_VisitorApplicationMaster_Vendor" Association="PortalModel.FK_VisitorApplicationMaster_Vendor">
+      <End Role="Vendor" EntitySet="Vendor" />
+      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VisitorCheckDaily_VisitorApplicationMaster" Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster">
+      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
+      <End Role="VisitorCheckDaily" EntitySet="VisitorCheckDaily" />
+    </AssociationSet>
+    <EntitySet Name="VisitorApplicationDetail" EntityType="PortalModel.VisitorApplicationDetail" />
+    <AssociationSet Name="FK_VisitorApplicationDetail_VisitorApplicationMaster" Association="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster">
+      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
+      <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VisitorCheckDaily_VisitorApplicationDetail" Association="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail">
+      <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />
+      <End Role="VisitorCheckDaily" EntitySet="VisitorCheckDaily" />
+    </AssociationSet>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_DETAIL_INSERT" ReturnType="Collection(String)">
+      <Parameter Name="ApplicationMasterid" Mode="In" Type="Int32" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="FullName" Mode="In" Type="String" />
+      <Parameter Name="IdentityCard" Mode="In" Type="String" />
+      <Parameter Name="TemporaryCard" Mode="In" Type="String" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DriverPlate" Mode="In" Type="String" />
+      <Parameter Name="VehicleType" Mode="In" Type="String" />
+      <Parameter Name="IsWorkHourOfficial" Mode="In" Type="Boolean" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_DETAIL_UPDATE" ReturnType="Collection(String)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="ApplicationMasterid" Mode="In" Type="Int32" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="FullName" Mode="In" Type="String" />
+      <Parameter Name="IdentityCard" Mode="In" Type="String" />
+      <Parameter Name="TemporaryCard" Mode="In" Type="String" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DriverPlate" Mode="In" Type="String" />
+      <Parameter Name="VehicleType" Mode="In" Type="String" />
+      <Parameter Name="IsWorkHourOfficial" Mode="In" Type="Boolean" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_DETAIL_GET" ReturnType="Collection(PortalModel.SP_VISITOR_APPLICATION_DETAIL_GET_Result)">
+      <Parameter Name="ApplicationMasterid" Mode="In" Type="Int32" />
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_DETAIL_DELETE">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_APPROVAL_HISTORY" ReturnType="Collection(PortalModel.SP_APPROVAL_HISTORY_Result)">
+      <Parameter Name="USERID" Mode="In" Type="String" />
+      <Parameter Name="APPLICATIONID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_UPDATE_ALLDATA">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="ApplicationId" Mode="In" Type="Int32" />
+      <Parameter Name="ApprovalLine" Mode="In" Type="String" />
+      <Parameter Name="ApprovalLineJson" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_GET_APPROVAL" ReturnType="Collection(PortalModel.SP_VISITOR_APPLICATION_GET_APPROVAL_Result)">
+      <Parameter Name="ApplicationId" Mode="In" Type="Int32" />
+      <Parameter Name="MasterId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_DELETE">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_GET" ReturnType="Collection(PortalModel.SP_VISITOR_APPLICATION_MASTER_GET_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="FROMDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="TODATE" Mode="In" Type="DateTime" />
+      <Parameter Name="APPLICATIONTYPE" Mode="In" Type="Int32" />
+      <Parameter Name="USERID" Mode="In" Type="String" />
+      <Parameter Name="APPROVESTATUS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_APPROVE">
+      <Parameter Name="MasterId" Mode="In" Type="Int32" />
+      <Parameter Name="ApplicationId" Mode="In" Type="Int32" />
+      <Parameter Name="IsApprove" Mode="In" Type="Boolean" />
+      <Parameter Name="Comment" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+      <Parameter Name="LinkApplication" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_CONFIRM">
+      <Parameter Name="MasterId" Mode="In" Type="Int32" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="LinkApplication" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_RECALL">
+      <Parameter Name="MasterId" Mode="In" Type="Int32" />
+      <Parameter Name="ApplicationId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_GETDETAIL" ReturnType="Collection(PortalModel.SP_VISITOR_APPLICATION_MASTER_GETDETAIL_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="USERID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY" ReturnType="Collection(PortalModel.SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY_Result)">
+      <Parameter Name="MasterId" Mode="In" Type="Int32" />
+      <Parameter Name="ApplicationId" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SP_FORGETCARD_GETALL_Result">
@@ -799,40 +919,6 @@
     <Property Name="DeleteDate" Type="DateTime" Precision="3" />
     <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="VisitorApplicationMaster">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Applicant" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="ApplicationType" Type="Guid" Nullable="false" />
-    <Property Name="Vendor" Type="Int32" Nullable="false" />
-    <Property Name="Purpose" Type="Guid" Nullable="false" />
-    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Gate" Type="Guid" Nullable="false" />
-    <Property Name="Location" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="LocationOther" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="ApprovalKind" Type="Guid" Nullable="false" />
-    <Property Name="ApprovalLine" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
-    <Property Name="ApprovalLineJson" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
-    <Property Name="ApprovalStatus" Type="Guid" Nullable="false" />
-    <Property Name="NextApprover" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
-    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdateUId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="VisitorCheckDaily" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster" FromRole="VisitorApplicationMaster" ToRole="VisitorCheckDaily" />
-    <Property Name="DeptId" Type="Int32" Nullable="false" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="HandPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="VisitorApplicationDetail" Relationship="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster" FromRole="VisitorApplicationMaster" ToRole="VisitorApplicationDetail" />
-  </EntityType>
   <EntityType Name="VisitorCheckDaily">
     <Key>
       <PropertyRef Name="Id" />
@@ -848,93 +934,6 @@
     <NavigationProperty Name="VisitorApplicationMaster" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster" FromRole="VisitorCheckDaily" ToRole="VisitorApplicationMaster" />
     <NavigationProperty Name="VisitorApplicationDetail" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail" FromRole="VisitorCheckDaily" ToRole="VisitorApplicationDetail" />
   </EntityType>
-  <Association Name="FK_VisitorCheckDaily_VisitorApplicationMaster">
-    <End Type="PortalModel.VisitorApplicationMaster" Role="VisitorApplicationMaster" Multiplicity="1" />
-    <End Type="PortalModel.VisitorCheckDaily" Role="VisitorCheckDaily" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VisitorApplicationMaster">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="VisitorCheckDaily">
-        <PropertyRef Name="ApplicationMaster" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <ComplexType Name="SP_VISITOR_APPLICATION_MASTER_GET_Result">
-    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
-    <Property Type="Int32" Name="Vendor" Nullable="false" />
-    <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Applicant" Nullable="false" MaxLength="20" />
-    <Property Type="String" Name="ApplicantName" Nullable="true" MaxLength="255" />
-    <Property Type="Guid" Name="Purpose" Nullable="false" />
-    <Property Type="String" Name="PurposeName" Nullable="true" MaxLength="500" />
-    <Property Type="Guid" Name="Gate" Nullable="false" />
-    <Property Type="String" Name="GateName" Nullable="true" MaxLength="500" />
-    <Property Type="Guid" Name="ApplicationType" Nullable="false" />
-    <Property Type="String" Name="ApplicationTypeName" Nullable="true" MaxLength="500" />
-    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
-    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
-    <Property Type="String" Name="LocationName" Nullable="true" />
-    <Property Type="Guid" Name="ApprovalKind" Nullable="false" />
-    <Property Type="String" Name="KindName" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="ApprovalLineJson" Nullable="false" MaxLength="4000" />
-    <Property Type="String" Name="ApprovalLine" Nullable="false" MaxLength="2000" />
-    <Property Type="String" Name="ApprovalStatusName" Nullable="true" MaxLength="500" />
-    <Property Type="Guid" Name="ApprovalStatus" Nullable="false" />
-    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="LocationOther" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ContactPhoneNumber" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="HandPhoneNumber" Nullable="true" MaxLength="20" />
-  </ComplexType>
-  <EntityType Name="VisitorApplicationDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ApplicationMaster" Type="Int32" Nullable="false" />
-    <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="IdentifyNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="TemporaryCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="DriverPlate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="VehicleType" Type="Guid" />
-    <Property Name="IsContactPerson" Type="Boolean" Nullable="false" />
-    <Property Name="IsWorkHourOfficial" Type="Boolean" />
-    <NavigationProperty Name="VisitorApplicationMaster" Relationship="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster" FromRole="VisitorApplicationDetail" ToRole="VisitorApplicationMaster" />
-    <NavigationProperty Name="VisitorCheckDaily" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail" FromRole="VisitorApplicationDetail" ToRole="VisitorCheckDaily" />
-  </EntityType>
-  <Association Name="FK_VisitorApplicationDetail_VisitorApplicationMaster">
-    <End Type="PortalModel.VisitorApplicationMaster" Role="VisitorApplicationMaster" Multiplicity="1" />
-    <End Type="PortalModel.VisitorApplicationDetail" Role="VisitorApplicationDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VisitorApplicationMaster">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="VisitorApplicationDetail">
-        <PropertyRef Name="ApplicationMaster" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_VisitorCheckDaily_VisitorApplicationDetail">
-    <End Type="PortalModel.VisitorApplicationDetail" Role="VisitorApplicationDetail" Multiplicity="1" />
-    <End Type="PortalModel.VisitorCheckDaily" Role="VisitorCheckDaily" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VisitorApplicationDetail">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="VisitorCheckDaily">
-        <PropertyRef Name="ApplicationDetail" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <ComplexType Name="SP_SYS_USER_LIST_Result">
     <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
@@ -967,5 +966,271 @@
     <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="CreateName" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="PersonInChargeName" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <Property Name="PersonInCharge" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPerson" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="IdentityCard" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateUId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="VisitorApplicationMaster" Relationship="PortalModel.FK_VisitorApplicationMaster_Vendor" FromRole="Vendor" ToRole="VisitorApplicationMaster" />
+    <Property Name="TermsOfUse" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VisitorApplicationMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ApplicationType" Type="Int32" Nullable="false" />
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <Property Name="Applicant" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="HandPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Vendor" Type="Int32" Nullable="false" />
+    <Property Name="Purpose" Type="Guid" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gate" Type="Guid" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="LocationOther" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalKind" Type="Guid" />
+    <Property Name="ApprovalLine" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalLineJson" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalStatus" Type="Guid" />
+    <Property Name="NextApprover" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateUId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Temp" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Vendor1" Relationship="PortalModel.FK_VisitorApplicationMaster_Vendor" FromRole="VisitorApplicationMaster" ToRole="Vendor" />
+    <NavigationProperty Name="VisitorCheckDaily" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationMaster" FromRole="VisitorApplicationMaster" ToRole="VisitorCheckDaily" />
+    <NavigationProperty Name="VisitorApplicationDetail" Relationship="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster" FromRole="VisitorApplicationMaster" ToRole="VisitorApplicationDetail" />
+  </EntityType>
+  <Association Name="FK_VisitorApplicationMaster_Vendor">
+    <End Type="PortalModel.Vendor" Role="Vendor" Multiplicity="1" />
+    <End Type="PortalModel.VisitorApplicationMaster" Role="VisitorApplicationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorApplicationMaster">
+        <PropertyRef Name="Vendor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VisitorCheckDaily_VisitorApplicationMaster">
+    <End Type="PortalModel.VisitorApplicationMaster" Role="VisitorApplicationMaster" Multiplicity="1" />
+    <End Type="PortalModel.VisitorCheckDaily" Role="VisitorCheckDaily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitorApplicationMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorCheckDaily">
+        <PropertyRef Name="ApplicationMaster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="VisitorApplicationDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicationMaster" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IdentityCard" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TemporaryCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DriverPlate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="VehicleType" Type="Guid" />
+    <Property Name="IsContactPerson" Type="Boolean" Nullable="false" />
+    <Property Name="IsWorkHourOfficial" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateUId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="VisitorApplicationMaster" Relationship="PortalModel.FK_VisitorApplicationDetail_VisitorApplicationMaster" FromRole="VisitorApplicationDetail" ToRole="VisitorApplicationMaster" />
+    <NavigationProperty Name="VisitorCheckDaily" Relationship="PortalModel.FK_VisitorCheckDaily_VisitorApplicationDetail" FromRole="VisitorApplicationDetail" ToRole="VisitorCheckDaily" />
+  </EntityType>
+  <Association Name="FK_VisitorApplicationDetail_VisitorApplicationMaster">
+    <End Type="PortalModel.VisitorApplicationMaster" Role="VisitorApplicationMaster" Multiplicity="1" />
+    <End Type="PortalModel.VisitorApplicationDetail" Role="VisitorApplicationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitorApplicationMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorApplicationDetail">
+        <PropertyRef Name="ApplicationMaster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VisitorCheckDaily_VisitorApplicationDetail">
+    <End Type="PortalModel.VisitorApplicationDetail" Role="VisitorApplicationDetail" Multiplicity="1" />
+    <End Type="PortalModel.VisitorCheckDaily" Role="VisitorCheckDaily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitorApplicationDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorCheckDaily">
+        <PropertyRef Name="ApplicationDetail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_VISITOR_APPLICATION_DETAIL_GET_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="ApplicationMaster" Nullable="false" />
+    <Property Type="String" Name="Image" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="IdentityCard" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="TemporaryCard" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="PhoneNumber" Nullable="false" MaxLength="15" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="DriverPlate" Nullable="true" MaxLength="20" />
+    <Property Type="Guid" Name="VehicleType" Nullable="true" />
+    <Property Type="Boolean" Name="IsWorkHourOfficial" Nullable="true" />
+    <Property Type="String" Name="VehicleTypeName" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="SP_APPROVAL_HISTORY_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="MasterId" Nullable="false" />
+    <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+    <Property Type="String" Name="ApplicationMasterName" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="ApplicationSubject" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ApprovalLine" Nullable="false" MaxLength="2000" />
+    <Property Type="String" Name="ApprovalLineJson" Nullable="false" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="SP_VISITOR_APPLICATION_GET_APPROVAL_Result">
+    <Property Type="String" Name="EmpId" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmpName" Nullable="true" MaxLength="259" />
+    <Property Type="Guid" Name="ApproverType" Nullable="true" />
+    <Property Type="Boolean" Name="IsApprove" Nullable="true" />
+    <Property Type="String" Name="Comment" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="DateApprove" Nullable="true" Precision="23" />
+    <Property Type="Byte" Name="Seq" Nullable="false" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+    <Property Type="Int32" Name="MasterId" Nullable="false" />
+    <Property Type="String" Name="ApproverTypeName" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="SP_VISITOR_APPLICATION_MASTER_GET_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Applicant" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ApplicantName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="HandPhoneNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="70" />
+    <Property Type="Guid" Name="Purpose" Nullable="false" />
+    <Property Type="String" Name="PurposeName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="LocationOther" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="300" />
+    <Property Type="Guid" Name="Gate" Nullable="false" />
+    <Property Type="String" Name="GateName" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="ApplicationType" Nullable="false" />
+    <Property Type="String" Name="ApplicationTypeName" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="ApprovalKind" Nullable="true" />
+    <Property Type="String" Name="KindName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="ApprovalLineJson" Nullable="false" MaxLength="4000" />
+    <Property Type="String" Name="ApprovalLine" Nullable="false" MaxLength="2000" />
+    <Property Type="String" Name="ApprovalStatusName" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="ApprovalStatus" Nullable="true" />
+    <Property Type="String" Name="LocationName" Nullable="true" />
+    <Property Type="String" Name="NextApprover" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="NextApproverName" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="ConfirmDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="CreateUid" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="CreateName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="Vendor" Nullable="false" />
+    <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ContactEmail" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="ContactPhone" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="VendorAddress" Nullable="true" MaxLength="300" />
+  </ComplexType>
+  <ComplexType Name="SP_VISITOR_APPLICATION_MASTER_GETDETAIL_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Applicant" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="ApplicantName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="HandPhoneNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PlantName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DeptName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SectName" Nullable="true" MaxLength="200" />
+    <Property Type="Guid" Name="Purpose" Nullable="false" />
+    <Property Type="String" Name="PurposeName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="LocationOther" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="300" />
+    <Property Type="Guid" Name="Gate" Nullable="false" />
+    <Property Type="String" Name="GateName" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="ApplicationType" Nullable="false" />
+    <Property Type="String" Name="ApplicationTypeName" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="ApprovalKind" Nullable="true" />
+    <Property Type="String" Name="KindName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="ApprovalLineJson" Nullable="false" MaxLength="4000" />
+    <Property Type="String" Name="ApprovalLine" Nullable="false" MaxLength="2000" />
+    <Property Type="String" Name="ApprovalStatusName" Nullable="true" MaxLength="500" />
+    <Property Type="Guid" Name="ApprovalStatus" Nullable="true" />
+    <Property Type="String" Name="LocationName" Nullable="true" />
+    <Property Type="String" Name="NextApprover" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="NextApproverName" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="ConfirmDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="CreateUid" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="CreateName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="Vendor" Nullable="false" />
+    <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="ContactEmail" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="ContactPhone" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="VendorAddress" Nullable="true" MaxLength="300" />
+    <Property Type="Boolean" Name="IsRecall" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY_Result">
+    <Property Type="Int32" Name="Id" Nullable="true" />
+    <Property Type="String" Name="EmpId" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="EmpName" Nullable="true" MaxLength="100" />
+    <Property Type="Guid" Name="ApprovalType" Nullable="true" />
+    <Property Type="String" Name="ApproverTypeName" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="IsApprove" Nullable="true" />
+    <Property Type="Byte" Name="Seq" Nullable="true" />
+    <Property Type="String" Name="Comment" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="DateApprove" Nullable="true" Precision="23" />
+    <Property Type="String" Name="DateApproveFormat" Nullable="true" MaxLength="19" />
   </ComplexType>
 </Schema>

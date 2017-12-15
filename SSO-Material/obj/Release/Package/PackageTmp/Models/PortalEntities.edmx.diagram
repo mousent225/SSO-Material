@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a2cc10ca9b24d66828a1a892a83188e" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="PortalModel.ForgetCard" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PortalModel.SysCategory" Width="1.5" PointX="3.375" PointY="5.875" />
+        <EntityTypeShape EntityType="PortalModel.SysCategoryValue" Width="1.5" PointX="5.625" PointY="1" />
+        <AssociationConnector Association="PortalModel.FK_Category_SysCategory_ID" />
+        <AssociationConnector Association="PortalModel.FK_ParentID_ID" />
+        <EntityTypeShape EntityType="PortalModel.HrDeptMaster" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="PortalModel.FK_HrDeptMaster_HrDeptMaster" />
+        <EntityTypeShape EntityType="PortalModel.HrEmpMaster" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="PortalModel.FK_CreateUid_HrEmpMaster" />
+        <AssociationConnector Association="PortalModel.FK_CreateUid_HrEmpMaster_EmpId" />
+        <AssociationConnector Association="PortalModel.FK_DeleteUid_HrEmpMaster_EmpId" />
+        <AssociationConnector Association="PortalModel.FK_SysCategory_DeleteUid_HrEmpMaster_EmpId" />
+        <AssociationConnector Association="PortalModel.FK_SysCategory_UpdateUid_HrEmpMaster_EmpId" />
+        <AssociationConnector Association="PortalModel.FK_UpdateUid_HrEmpMaster_EmpId" />
+        <EntityTypeShape EntityType="PortalModel.SysLogHistory" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PortalModel.HrDeptMasterFull" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PortalModel.ApplicationConfig" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="PortalModel.FK_ApplicationConfig_HrDeptMaster" />
+        <AssociationConnector Association="PortalModel.FK_ApplicationConfig_HrEmpMaster" />
+        <AssociationConnector Association="PortalModel.FK_ApplicationConfig_HrEmpMaster1" />
+        <EntityTypeShape EntityType="PortalModel.SysRole" Width="1.5" PointX="3.75" PointY="10.625" />
+        <EntityTypeShape EntityType="PortalModel.SysRoleMapping" Width="1.5" PointX="6" PointY="11" />
+        <EntityTypeShape EntityType="PortalModel.SysUserMapping" Width="1.5" PointX="6" PointY="7.375" />
+        <AssociationConnector Association="PortalModel.FK_SysUserMapping_HrEmpMaster" />
+        <AssociationConnector Association="PortalModel.FK_SysRoleMapping_SysRole" />
+        <AssociationConnector Association="PortalModel.FK_SysUserMapping_SysRole" />
+        <EntityTypeShape EntityType="PortalModel.SysAuthorization" Width="1.5" PointX="8.375" PointY="5.75" />
+        <EntityTypeShape EntityType="PortalModel.SysUser" Width="1.5" PointX="0.75" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

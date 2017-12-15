@@ -22,7 +22,7 @@ namespace SSO_Material.Controllers
             return result.Any() ? Json(result, JsonRequestBehavior.AllowGet) : null;
         }
         #region employee 
-        public ActionResult ShowModalEmployeeInfor(string id)
+        public ActionResult ShowModalEmployeeInfor(string id)//id: iclude empId_modalName
         {
             ViewBag.EmpId = id;
             return PartialView("_EmployeeInfor");

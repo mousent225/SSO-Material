@@ -223,6 +223,28 @@
     <Property Name="Reason" Type="uniqueidentifier" />
     <Property Name="ReasonOthers" Type="nvarchar" MaxLength="500" />
   </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="DeptId" Type="int" Nullable="false" />
+    <Property Name="PersonInCharge" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="70" />
+    <Property Name="IdentityCard" Type="varchar" MaxLength="15" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="70" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUid" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="UpdateUId" Type="varchar" MaxLength="20" />
+    <Property Name="DeleteDate" Type="datetime" />
+    <Property Name="DeleteUid" Type="varchar" MaxLength="20" />
+    <Property Name="TermsOfUse" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Violation">
     <Key>
       <PropertyRef Name="Id" />
@@ -255,7 +277,7 @@
     <Property Name="ApplicationMaster" Type="int" Nullable="false" />
     <Property Name="Image" Type="varchar" MaxLength="200" />
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="IdentifyNo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="IdentityCard" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="TemporaryCard" Type="varchar" MaxLength="20" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="FromDate" Type="datetime" Nullable="false" />
@@ -264,6 +286,12 @@
     <Property Name="VehicleType" Type="uniqueidentifier" />
     <Property Name="IsContactPerson" Type="bit" Nullable="false" />
     <Property Name="IsWorkHourOfficial" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUid" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="UpdateUId" Type="varchar" MaxLength="20" />
+    <Property Name="DeleteDate" Type="datetime" />
+    <Property Name="DeleteUid" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="VisitorApplicationMaster">
     <Key>
@@ -271,23 +299,23 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApplicationType" Type="int" Nullable="false" />
     <Property Name="DeptId" Type="int" Nullable="false" />
     <Property Name="Applicant" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
     <Property Name="HandPhoneNumber" Type="varchar" MaxLength="20" />
-    <Property Name="ApplicationType" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Vendor" Type="int" Nullable="false" />
     <Property Name="Purpose" Type="uniqueidentifier" Nullable="false" />
     <Property Name="FromDate" Type="datetime" Nullable="false" />
     <Property Name="ToDate" Type="datetime" Nullable="false" />
     <Property Name="Gate" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Location" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="300" />
     <Property Name="LocationOther" Type="nvarchar" MaxLength="200" />
     <Property Name="Remark" Type="nvarchar" MaxLength="500" />
-    <Property Name="ApprovalKind" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ApprovalLine" Type="nvarchar" MaxLength="2000" Nullable="false" />
-    <Property Name="ApprovalLineJson" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="ApprovalStatus" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ApprovalKind" Type="uniqueidentifier" />
+    <Property Name="ApprovalLine" Type="nvarchar" MaxLength="2000" />
+    <Property Name="ApprovalLineJson" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ApprovalStatus" Type="uniqueidentifier" />
     <Property Name="NextApprover" Type="varchar" MaxLength="20" />
     <Property Name="ConfirmDate" Type="datetime" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -296,6 +324,7 @@
     <Property Name="UpdateUId" Type="varchar" MaxLength="20" />
     <Property Name="DeleteDate" Type="datetime" />
     <Property Name="DeleteUid" Type="varchar" MaxLength="20" />
+    <Property Name="Temp" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="VisitorCheckDaily">
     <Key>
@@ -502,6 +531,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_VisitorApplicationMaster_Vendor">
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
+    <End Role="VisitorApplicationMaster" Type="Self.VisitorApplicationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VisitorApplicationMaster">
+        <PropertyRef Name="Vendor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_VisitorCheckDaily_VisitorApplicationDetail">
     <End Role="VisitorApplicationDetail" Type="Self.VisitorApplicationDetail" Multiplicity="1" />
     <End Role="VisitorCheckDaily" Type="Self.VisitorCheckDaily" Multiplicity="*" />
@@ -572,6 +613,10 @@
     <Parameter Name="ToDate" Type="date" Mode="In" />
   </Function>
   <Function Name="SP_APPLICATION_CONFIG_GETLIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EApproval" />
+  <Function Name="SP_APPROVAL_HISTORY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EApproval">
+    <Parameter Name="USERID" Type="varchar" Mode="In" />
+    <Parameter Name="APPLICATIONID" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_EMPLOYEE_INFOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EApproval">
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
     <Parameter Name="EMPID" Type="varchar" Mode="In" />
@@ -639,12 +684,123 @@
     <Parameter Name="Active" Type="bit" Mode="In" />
     <Parameter Name="UserId" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SP_VISITOR_APPLICATION_DETAIL_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_DETAIL_GET" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="ApplicationMasterid" Type="int" Mode="In" />
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_DETAIL_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="ApplicationMasterid" Type="int" Mode="In" />
+    <Parameter Name="Image" Type="varchar" Mode="In" />
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="IdentityCard" Type="varchar" Mode="In" />
+    <Parameter Name="TemporaryCard" Type="varchar" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="DriverPlate" Type="varchar" Mode="In" />
+    <Parameter Name="VehicleType" Type="varchar" Mode="In" />
+    <Parameter Name="IsWorkHourOfficial" Type="bit" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_DETAIL_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="ApplicationMasterid" Type="int" Mode="In" />
+    <Parameter Name="Image" Type="varchar" Mode="In" />
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="IdentityCard" Type="varchar" Mode="In" />
+    <Parameter Name="TemporaryCard" Type="varchar" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="DriverPlate" Type="varchar" Mode="In" />
+    <Parameter Name="VehicleType" Type="varchar" Mode="In" />
+    <Parameter Name="IsWorkHourOfficial" Type="bit" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_GET_APPROVAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="ApplicationId" Type="int" Mode="In" />
+    <Parameter Name="MasterId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="MasterId" Type="int" Mode="In" />
+    <Parameter Name="ApplicationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_APPROVE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="MasterId" Type="int" Mode="In" />
+    <Parameter Name="ApplicationId" Type="int" Mode="In" />
+    <Parameter Name="IsApprove" Type="bit" Mode="In" />
+    <Parameter Name="Comment" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+    <Parameter Name="LinkApplication" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_CONFIRM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="MasterId" Type="int" Mode="In" />
+    <Parameter Name="Status" Type="bit" Mode="In" />
+    <Parameter Name="LinkApplication" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_VISITOR_APPLICATION_MASTER_GET" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="FROMDATE" Type="date" Mode="In" />
     <Parameter Name="TODATE" Type="date" Mode="In" />
-    <Parameter Name="APPLICATIONTYPE" Type="varchar" Mode="In" />
+    <Parameter Name="APPLICATIONTYPE" Type="int" Mode="In" />
     <Parameter Name="USERID" Type="varchar" Mode="In" />
     <Parameter Name="APPROVESTATUS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_GETDETAIL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="USERID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="DeptId" Type="int" Mode="In" />
+    <Parameter Name="Applicant" Type="varchar" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="HandPhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="ApplicationType" Type="int" Mode="In" />
+    <Parameter Name="Vendor" Type="int" Mode="In" />
+    <Parameter Name="Purpose" Type="varchar" Mode="In" />
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="Gate" Type="varchar" Mode="In" />
+    <Parameter Name="Location" Type="varchar" Mode="In" />
+    <Parameter Name="LocationOther" Type="nvarchar" Mode="In" />
+    <Parameter Name="Remarke" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_RECALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="MasterId" Type="int" Mode="In" />
+    <Parameter Name="ApplicationId" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="DeptId" Type="int" Mode="In" />
+    <Parameter Name="Applicant" Type="varchar" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="HandPhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="ApplicationType" Type="int" Mode="In" />
+    <Parameter Name="Vendor" Type="int" Mode="In" />
+    <Parameter Name="Purpose" Type="varchar" Mode="In" />
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="Gate" Type="varchar" Mode="In" />
+    <Parameter Name="Location" Type="varchar" Mode="In" />
+    <Parameter Name="LocationOther" Type="nvarchar" Mode="In" />
+    <Parameter Name="Remarke" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_VISITOR_APPLICATION_MASTER_UPDATE_ALLDATA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="GATE">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="ApplicationId" Type="int" Mode="In" />
+    <Parameter Name="ApprovalLine" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApprovalLineJson" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="PortalModelStoreContainer">
     <EntitySet Name="HrDeptMaster" EntityType="Self.HrDeptMaster" Schema="dbo" store:Type="Tables" />
@@ -660,6 +816,7 @@
     <EntitySet Name="SysUserMapping" EntityType="Self.SysUserMapping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ApplicationConfig" EntityType="Self.ApplicationConfig" Schema="EApproval" store:Type="Tables" />
     <EntitySet Name="ForgetCard" EntityType="Self.ForgetCard" Schema="GATE" store:Type="Tables" />
+    <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="GATE" store:Type="Tables" />
     <EntitySet Name="Violation" EntityType="Self.Violation" Schema="GATE" store:Type="Tables" />
     <EntitySet Name="VisitorApplicationDetail" EntityType="Self.VisitorApplicationDetail" Schema="GATE" store:Type="Tables" />
     <EntitySet Name="VisitorApplicationMaster" EntityType="Self.VisitorApplicationMaster" Schema="GATE" store:Type="Tables" />
@@ -727,6 +884,10 @@
     <AssociationSet Name="FK_VisitorApplicationDetail_VisitorApplicationMaster" Association="Self.FK_VisitorApplicationDetail_VisitorApplicationMaster">
       <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
       <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VisitorApplicationMaster_Vendor" Association="Self.FK_VisitorApplicationMaster_Vendor">
+      <End Role="Vendor" EntitySet="Vendor" />
+      <End Role="VisitorApplicationMaster" EntitySet="VisitorApplicationMaster" />
     </AssociationSet>
     <AssociationSet Name="FK_VisitorCheckDaily_VisitorApplicationDetail" Association="Self.FK_VisitorCheckDaily_VisitorApplicationDetail">
       <End Role="VisitorApplicationDetail" EntitySet="VisitorApplicationDetail" />

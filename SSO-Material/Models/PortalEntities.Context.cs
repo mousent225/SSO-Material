@@ -41,8 +41,9 @@ namespace SSO_Material.Models
         public virtual DbSet<SysAuthorization> SysAuthorization { get; set; }
         public virtual DbSet<SysUser> SysUser { get; set; }
         public virtual DbSet<Violation> Violation { get; set; }
-        public virtual DbSet<VisitorApplicationMaster> VisitorApplicationMaster { get; set; }
         public virtual DbSet<VisitorCheckDaily> VisitorCheckDaily { get; set; }
+        public virtual DbSet<Vendor> Vendor { get; set; }
+        public virtual DbSet<VisitorApplicationMaster> VisitorApplicationMaster { get; set; }
         public virtual DbSet<VisitorApplicationDetail> VisitorApplicationDetail { get; set; }
     
         public virtual ObjectResult<SP_FORGETCARD_GETALL_Result> SP_FORGETCARD_GETALL(Nullable<int> dEPTID, string eMPID, string eMPNAME, string pOSITION, string jOBTITLE, Nullable<System.DateTime> fROMDATE, Nullable<System.DateTime> tODATE)
@@ -286,31 +287,6 @@ namespace SSO_Material.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_APPLICATION_CONFIG_GETLIST_Result>("SP_APPLICATION_CONFIG_GETLIST");
         }
     
-        public virtual ObjectResult<SP_VISITOR_APPLICATION_MASTER_GET_Result> SP_VISITOR_APPLICATION_MASTER_GET(Nullable<System.DateTime> fROMDATE, Nullable<System.DateTime> tODATE, string aPPLICATIONTYPE, string uSERID, string aPPROVESTATUS)
-        {
-            var fROMDATEParameter = fROMDATE.HasValue ?
-                new ObjectParameter("FROMDATE", fROMDATE) :
-                new ObjectParameter("FROMDATE", typeof(System.DateTime));
-    
-            var tODATEParameter = tODATE.HasValue ?
-                new ObjectParameter("TODATE", tODATE) :
-                new ObjectParameter("TODATE", typeof(System.DateTime));
-    
-            var aPPLICATIONTYPEParameter = aPPLICATIONTYPE != null ?
-                new ObjectParameter("APPLICATIONTYPE", aPPLICATIONTYPE) :
-                new ObjectParameter("APPLICATIONTYPE", typeof(string));
-    
-            var uSERIDParameter = uSERID != null ?
-                new ObjectParameter("USERID", uSERID) :
-                new ObjectParameter("USERID", typeof(string));
-    
-            var aPPROVESTATUSParameter = aPPROVESTATUS != null ?
-                new ObjectParameter("APPROVESTATUS", aPPROVESTATUS) :
-                new ObjectParameter("APPROVESTATUS", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VISITOR_APPLICATION_MASTER_GET_Result>("SP_VISITOR_APPLICATION_MASTER_GET", fROMDATEParameter, tODATEParameter, aPPLICATIONTYPEParameter, uSERIDParameter, aPPROVESTATUSParameter);
-        }
-    
         public virtual int SP_VENDOR_DELETE(Nullable<int> id, string userId)
         {
             var idParameter = id.HasValue ?
@@ -470,6 +446,446 @@ namespace SSO_Material.Models
                 new ObjectParameter("TODATE", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VENDOR_GET_Result>("SP_VENDOR_GET", iDParameter, eMPIDParameter, fROMDATEParameter, tODATEParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> SP_VISITOR_APPLICATION_MASTER_INSERT(Nullable<int> deptId, string applicant, string phoneNumber, string handPhoneNumber, Nullable<int> applicationType, Nullable<int> vendor, string purpose, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string gate, string location, string locationOther, string remarke, string userId)
+        {
+            var deptIdParameter = deptId.HasValue ?
+                new ObjectParameter("DeptId", deptId) :
+                new ObjectParameter("DeptId", typeof(int));
+    
+            var applicantParameter = applicant != null ?
+                new ObjectParameter("Applicant", applicant) :
+                new ObjectParameter("Applicant", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("PhoneNumber", phoneNumber) :
+                new ObjectParameter("PhoneNumber", typeof(string));
+    
+            var handPhoneNumberParameter = handPhoneNumber != null ?
+                new ObjectParameter("HandPhoneNumber", handPhoneNumber) :
+                new ObjectParameter("HandPhoneNumber", typeof(string));
+    
+            var applicationTypeParameter = applicationType.HasValue ?
+                new ObjectParameter("ApplicationType", applicationType) :
+                new ObjectParameter("ApplicationType", typeof(int));
+    
+            var vendorParameter = vendor.HasValue ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(int));
+    
+            var purposeParameter = purpose != null ?
+                new ObjectParameter("Purpose", purpose) :
+                new ObjectParameter("Purpose", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var gateParameter = gate != null ?
+                new ObjectParameter("Gate", gate) :
+                new ObjectParameter("Gate", typeof(string));
+    
+            var locationParameter = location != null ?
+                new ObjectParameter("Location", location) :
+                new ObjectParameter("Location", typeof(string));
+    
+            var locationOtherParameter = locationOther != null ?
+                new ObjectParameter("LocationOther", locationOther) :
+                new ObjectParameter("LocationOther", typeof(string));
+    
+            var remarkeParameter = remarke != null ?
+                new ObjectParameter("Remarke", remarke) :
+                new ObjectParameter("Remarke", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("SP_VISITOR_APPLICATION_MASTER_INSERT", deptIdParameter, applicantParameter, phoneNumberParameter, handPhoneNumberParameter, applicationTypeParameter, vendorParameter, purposeParameter, fromDateParameter, toDateParameter, gateParameter, locationParameter, locationOtherParameter, remarkeParameter, userIdParameter);
+        }
+    
+        public virtual int SP_VISITOR_APPLICATION_MASTER_UPDATE(Nullable<int> id, Nullable<int> deptId, string applicant, string phoneNumber, string handPhoneNumber, Nullable<int> applicationType, Nullable<int> vendor, string purpose, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string gate, string location, string locationOther, string remarke, string userId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var deptIdParameter = deptId.HasValue ?
+                new ObjectParameter("DeptId", deptId) :
+                new ObjectParameter("DeptId", typeof(int));
+    
+            var applicantParameter = applicant != null ?
+                new ObjectParameter("Applicant", applicant) :
+                new ObjectParameter("Applicant", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("PhoneNumber", phoneNumber) :
+                new ObjectParameter("PhoneNumber", typeof(string));
+    
+            var handPhoneNumberParameter = handPhoneNumber != null ?
+                new ObjectParameter("HandPhoneNumber", handPhoneNumber) :
+                new ObjectParameter("HandPhoneNumber", typeof(string));
+    
+            var applicationTypeParameter = applicationType.HasValue ?
+                new ObjectParameter("ApplicationType", applicationType) :
+                new ObjectParameter("ApplicationType", typeof(int));
+    
+            var vendorParameter = vendor.HasValue ?
+                new ObjectParameter("Vendor", vendor) :
+                new ObjectParameter("Vendor", typeof(int));
+    
+            var purposeParameter = purpose != null ?
+                new ObjectParameter("Purpose", purpose) :
+                new ObjectParameter("Purpose", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var gateParameter = gate != null ?
+                new ObjectParameter("Gate", gate) :
+                new ObjectParameter("Gate", typeof(string));
+    
+            var locationParameter = location != null ?
+                new ObjectParameter("Location", location) :
+                new ObjectParameter("Location", typeof(string));
+    
+            var locationOtherParameter = locationOther != null ?
+                new ObjectParameter("LocationOther", locationOther) :
+                new ObjectParameter("LocationOther", typeof(string));
+    
+            var remarkeParameter = remarke != null ?
+                new ObjectParameter("Remarke", remarke) :
+                new ObjectParameter("Remarke", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VISITOR_APPLICATION_MASTER_UPDATE", idParameter, deptIdParameter, applicantParameter, phoneNumberParameter, handPhoneNumberParameter, applicationTypeParameter, vendorParameter, purposeParameter, fromDateParameter, toDateParameter, gateParameter, locationParameter, locationOtherParameter, remarkeParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<string> SP_VISITOR_APPLICATION_DETAIL_INSERT(Nullable<int> applicationMasterid, string image, string fullName, string identityCard, string temporaryCard, string phoneNumber, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string driverPlate, string vehicleType, Nullable<bool> isWorkHourOfficial, string userId)
+        {
+            var applicationMasteridParameter = applicationMasterid.HasValue ?
+                new ObjectParameter("ApplicationMasterid", applicationMasterid) :
+                new ObjectParameter("ApplicationMasterid", typeof(int));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("FullName", fullName) :
+                new ObjectParameter("FullName", typeof(string));
+    
+            var identityCardParameter = identityCard != null ?
+                new ObjectParameter("IdentityCard", identityCard) :
+                new ObjectParameter("IdentityCard", typeof(string));
+    
+            var temporaryCardParameter = temporaryCard != null ?
+                new ObjectParameter("TemporaryCard", temporaryCard) :
+                new ObjectParameter("TemporaryCard", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("PhoneNumber", phoneNumber) :
+                new ObjectParameter("PhoneNumber", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var driverPlateParameter = driverPlate != null ?
+                new ObjectParameter("DriverPlate", driverPlate) :
+                new ObjectParameter("DriverPlate", typeof(string));
+    
+            var vehicleTypeParameter = vehicleType != null ?
+                new ObjectParameter("VehicleType", vehicleType) :
+                new ObjectParameter("VehicleType", typeof(string));
+    
+            var isWorkHourOfficialParameter = isWorkHourOfficial.HasValue ?
+                new ObjectParameter("IsWorkHourOfficial", isWorkHourOfficial) :
+                new ObjectParameter("IsWorkHourOfficial", typeof(bool));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_VISITOR_APPLICATION_DETAIL_INSERT", applicationMasteridParameter, imageParameter, fullNameParameter, identityCardParameter, temporaryCardParameter, phoneNumberParameter, fromDateParameter, toDateParameter, driverPlateParameter, vehicleTypeParameter, isWorkHourOfficialParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<string> SP_VISITOR_APPLICATION_DETAIL_UPDATE(Nullable<int> id, Nullable<int> applicationMasterid, string image, string fullName, string identityCard, string temporaryCard, string phoneNumber, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string driverPlate, string vehicleType, Nullable<bool> isWorkHourOfficial, string userId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var applicationMasteridParameter = applicationMasterid.HasValue ?
+                new ObjectParameter("ApplicationMasterid", applicationMasterid) :
+                new ObjectParameter("ApplicationMasterid", typeof(int));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("FullName", fullName) :
+                new ObjectParameter("FullName", typeof(string));
+    
+            var identityCardParameter = identityCard != null ?
+                new ObjectParameter("IdentityCard", identityCard) :
+                new ObjectParameter("IdentityCard", typeof(string));
+    
+            var temporaryCardParameter = temporaryCard != null ?
+                new ObjectParameter("TemporaryCard", temporaryCard) :
+                new ObjectParameter("TemporaryCard", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("PhoneNumber", phoneNumber) :
+                new ObjectParameter("PhoneNumber", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var driverPlateParameter = driverPlate != null ?
+                new ObjectParameter("DriverPlate", driverPlate) :
+                new ObjectParameter("DriverPlate", typeof(string));
+    
+            var vehicleTypeParameter = vehicleType != null ?
+                new ObjectParameter("VehicleType", vehicleType) :
+                new ObjectParameter("VehicleType", typeof(string));
+    
+            var isWorkHourOfficialParameter = isWorkHourOfficial.HasValue ?
+                new ObjectParameter("IsWorkHourOfficial", isWorkHourOfficial) :
+                new ObjectParameter("IsWorkHourOfficial", typeof(bool));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_VISITOR_APPLICATION_DETAIL_UPDATE", idParameter, applicationMasteridParameter, imageParameter, fullNameParameter, identityCardParameter, temporaryCardParameter, phoneNumberParameter, fromDateParameter, toDateParameter, driverPlateParameter, vehicleTypeParameter, isWorkHourOfficialParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_VISITOR_APPLICATION_DETAIL_GET_Result> SP_VISITOR_APPLICATION_DETAIL_GET(Nullable<int> applicationMasterid, Nullable<int> id)
+        {
+            var applicationMasteridParameter = applicationMasterid.HasValue ?
+                new ObjectParameter("ApplicationMasterid", applicationMasterid) :
+                new ObjectParameter("ApplicationMasterid", typeof(int));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VISITOR_APPLICATION_DETAIL_GET_Result>("SP_VISITOR_APPLICATION_DETAIL_GET", applicationMasteridParameter, idParameter);
+        }
+    
+        public virtual int SP_VISITOR_APPLICATION_DETAIL_DELETE(Nullable<int> id, string userId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VISITOR_APPLICATION_DETAIL_DELETE", idParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_APPROVAL_HISTORY_Result> SP_APPROVAL_HISTORY(string uSERID, Nullable<int> aPPLICATIONID)
+        {
+            var uSERIDParameter = uSERID != null ?
+                new ObjectParameter("USERID", uSERID) :
+                new ObjectParameter("USERID", typeof(string));
+    
+            var aPPLICATIONIDParameter = aPPLICATIONID.HasValue ?
+                new ObjectParameter("APPLICATIONID", aPPLICATIONID) :
+                new ObjectParameter("APPLICATIONID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_APPROVAL_HISTORY_Result>("SP_APPROVAL_HISTORY", uSERIDParameter, aPPLICATIONIDParameter);
+        }
+    
+        public virtual int SP_VISITOR_APPLICATION_MASTER_UPDATE_ALLDATA(Nullable<int> id, Nullable<int> applicationId, string approvalLine, string approvalLineJson, string userId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var applicationIdParameter = applicationId.HasValue ?
+                new ObjectParameter("ApplicationId", applicationId) :
+                new ObjectParameter("ApplicationId", typeof(int));
+    
+            var approvalLineParameter = approvalLine != null ?
+                new ObjectParameter("ApprovalLine", approvalLine) :
+                new ObjectParameter("ApprovalLine", typeof(string));
+    
+            var approvalLineJsonParameter = approvalLineJson != null ?
+                new ObjectParameter("ApprovalLineJson", approvalLineJson) :
+                new ObjectParameter("ApprovalLineJson", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VISITOR_APPLICATION_MASTER_UPDATE_ALLDATA", idParameter, applicationIdParameter, approvalLineParameter, approvalLineJsonParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_VISITOR_APPLICATION_GET_APPROVAL_Result> SP_VISITOR_APPLICATION_GET_APPROVAL(Nullable<int> applicationId, Nullable<int> masterId)
+        {
+            var applicationIdParameter = applicationId.HasValue ?
+                new ObjectParameter("ApplicationId", applicationId) :
+                new ObjectParameter("ApplicationId", typeof(int));
+    
+            var masterIdParameter = masterId.HasValue ?
+                new ObjectParameter("MasterId", masterId) :
+                new ObjectParameter("MasterId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VISITOR_APPLICATION_GET_APPROVAL_Result>("SP_VISITOR_APPLICATION_GET_APPROVAL", applicationIdParameter, masterIdParameter);
+        }
+    
+        public virtual int SP_VISITOR_APPLICATION_MASTER_DELETE(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VISITOR_APPLICATION_MASTER_DELETE", idParameter);
+        }
+    
+        public virtual ObjectResult<SP_VISITOR_APPLICATION_MASTER_GET_Result> SP_VISITOR_APPLICATION_MASTER_GET(Nullable<int> iD, Nullable<System.DateTime> fROMDATE, Nullable<System.DateTime> tODATE, Nullable<int> aPPLICATIONTYPE, string uSERID, string aPPROVESTATUS)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var fROMDATEParameter = fROMDATE.HasValue ?
+                new ObjectParameter("FROMDATE", fROMDATE) :
+                new ObjectParameter("FROMDATE", typeof(System.DateTime));
+    
+            var tODATEParameter = tODATE.HasValue ?
+                new ObjectParameter("TODATE", tODATE) :
+                new ObjectParameter("TODATE", typeof(System.DateTime));
+    
+            var aPPLICATIONTYPEParameter = aPPLICATIONTYPE.HasValue ?
+                new ObjectParameter("APPLICATIONTYPE", aPPLICATIONTYPE) :
+                new ObjectParameter("APPLICATIONTYPE", typeof(int));
+    
+            var uSERIDParameter = uSERID != null ?
+                new ObjectParameter("USERID", uSERID) :
+                new ObjectParameter("USERID", typeof(string));
+    
+            var aPPROVESTATUSParameter = aPPROVESTATUS != null ?
+                new ObjectParameter("APPROVESTATUS", aPPROVESTATUS) :
+                new ObjectParameter("APPROVESTATUS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VISITOR_APPLICATION_MASTER_GET_Result>("SP_VISITOR_APPLICATION_MASTER_GET", iDParameter, fROMDATEParameter, tODATEParameter, aPPLICATIONTYPEParameter, uSERIDParameter, aPPROVESTATUSParameter);
+        }
+    
+        public virtual int SP_VISITOR_APPLICATION_MASTER_APPROVE(Nullable<int> masterId, Nullable<int> applicationId, Nullable<bool> isApprove, string comment, string userId, string linkApplication)
+        {
+            var masterIdParameter = masterId.HasValue ?
+                new ObjectParameter("MasterId", masterId) :
+                new ObjectParameter("MasterId", typeof(int));
+    
+            var applicationIdParameter = applicationId.HasValue ?
+                new ObjectParameter("ApplicationId", applicationId) :
+                new ObjectParameter("ApplicationId", typeof(int));
+    
+            var isApproveParameter = isApprove.HasValue ?
+                new ObjectParameter("IsApprove", isApprove) :
+                new ObjectParameter("IsApprove", typeof(bool));
+    
+            var commentParameter = comment != null ?
+                new ObjectParameter("Comment", comment) :
+                new ObjectParameter("Comment", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var linkApplicationParameter = linkApplication != null ?
+                new ObjectParameter("LinkApplication", linkApplication) :
+                new ObjectParameter("LinkApplication", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VISITOR_APPLICATION_MASTER_APPROVE", masterIdParameter, applicationIdParameter, isApproveParameter, commentParameter, userIdParameter, linkApplicationParameter);
+        }
+    
+        public virtual int SP_VISITOR_APPLICATION_MASTER_CONFIRM(Nullable<int> masterId, Nullable<bool> status, string linkApplication)
+        {
+            var masterIdParameter = masterId.HasValue ?
+                new ObjectParameter("MasterId", masterId) :
+                new ObjectParameter("MasterId", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var linkApplicationParameter = linkApplication != null ?
+                new ObjectParameter("LinkApplication", linkApplication) :
+                new ObjectParameter("LinkApplication", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VISITOR_APPLICATION_MASTER_CONFIRM", masterIdParameter, statusParameter, linkApplicationParameter);
+        }
+    
+        public virtual int SP_VISITOR_APPLICATION_MASTER_RECALL(Nullable<int> masterId, Nullable<int> applicationId, string userId)
+        {
+            var masterIdParameter = masterId.HasValue ?
+                new ObjectParameter("MasterId", masterId) :
+                new ObjectParameter("MasterId", typeof(int));
+    
+            var applicationIdParameter = applicationId.HasValue ?
+                new ObjectParameter("ApplicationId", applicationId) :
+                new ObjectParameter("ApplicationId", typeof(int));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VISITOR_APPLICATION_MASTER_RECALL", masterIdParameter, applicationIdParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_VISITOR_APPLICATION_MASTER_GETDETAIL_Result> SP_VISITOR_APPLICATION_MASTER_GETDETAIL(Nullable<int> iD, string uSERID)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var uSERIDParameter = uSERID != null ?
+                new ObjectParameter("USERID", uSERID) :
+                new ObjectParameter("USERID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VISITOR_APPLICATION_MASTER_GETDETAIL_Result>("SP_VISITOR_APPLICATION_MASTER_GETDETAIL", iDParameter, uSERIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY_Result> SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY(Nullable<int> masterId, Nullable<int> applicationId)
+        {
+            var masterIdParameter = masterId.HasValue ?
+                new ObjectParameter("MasterId", masterId) :
+                new ObjectParameter("MasterId", typeof(int));
+    
+            var applicationIdParameter = applicationId.HasValue ?
+                new ObjectParameter("ApplicationId", applicationId) :
+                new ObjectParameter("ApplicationId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY_Result>("SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY", masterIdParameter, applicationIdParameter);
         }
     }
 }

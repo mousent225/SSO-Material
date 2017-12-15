@@ -24,7 +24,7 @@ namespace SSO_Material.Models
         public int ApplicationMaster { get; set; }
         public string Image { get; set; }
         public string FullName { get; set; }
-        public string IdentifyNo { get; set; }
+        public string IdentityCard { get; set; }
         public string TemporaryCard { get; set; }
         public string PhoneNumber { get; set; }
         public System.DateTime FromDate { get; set; }
@@ -33,6 +33,12 @@ namespace SSO_Material.Models
         public Nullable<System.Guid> VehicleType { get; set; }
         public bool IsContactPerson { get; set; }
         public Nullable<bool> IsWorkHourOfficial { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public string CreateUid { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string UpdateUId { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
+        public string DeleteUid { get; set; }
     
         public virtual VisitorApplicationMaster VisitorApplicationMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

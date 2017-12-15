@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "ViewDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input type="hidden" id="hdfApplicationId" value="@ViewBag.ApplicationId" />
+<div id="divContent">
+
+</div>
+
+<script type="text/javascript">
+    (function (namespace, $) {
+        "use strict";
+
+        var ApplicationViewDetail = function () {
+            // Create reference to this instance
+            var o = this;
+            // Initialize app when document is ready
+            $(document).ready(function () {
+                o.initialize();
+            });
+
+        };
+        var p = ApplicationViewDetail.prototype;
+
+        // =========================================================================
+        // INIT
+        // =========================================================================
+
+        p.initialize = function () {
+            var link = '@Url.Action("ShowApplicationDetailView", "VisitorApplicationMaster", new { id = "vendorId" })';
+            $.get(link.replace('vendorId', $("#hdfApplicationId").val()), function (data) {
+                $("#divContent").html(data);
+                var $body = $("#divContent").find(".modal-body").first();
+                $("#divContent").find(".modal-content").first().html($body).removeClass("modal-content");
+                 //$("#mdAppDetailView .modal-body").css({ "max-height": $('footer').position().top - 130, overflow:"auto" });
+            });
+        };
+
+        // =========================================================================
+        namespace.ApplicationViewDetail = new ApplicationViewDetail;
+    }(this.materialadmin, jQuery)); // pass in (namespace, jQuery):
+</script>

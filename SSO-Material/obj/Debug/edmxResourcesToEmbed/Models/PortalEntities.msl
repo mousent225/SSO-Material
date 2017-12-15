@@ -439,39 +439,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="VisitorApplicationMaster">
-      <EntityTypeMapping TypeName="PortalModel.VisitorApplicationMaster">
-        <MappingFragment StoreEntitySet="VisitorApplicationMaster">
-          <ScalarProperty Name="HandPhoneNumber" ColumnName="HandPhoneNumber" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="DeptId" ColumnName="DeptId" />
-          <ScalarProperty Name="DeleteUid" ColumnName="DeleteUid" />
-          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
-          <ScalarProperty Name="UpdateUId" ColumnName="UpdateUId" />
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ConfirmDate" ColumnName="ConfirmDate" />
-          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
-          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
-          <ScalarProperty Name="ApprovalLineJson" ColumnName="ApprovalLineJson" />
-          <ScalarProperty Name="ApprovalLine" ColumnName="ApprovalLine" />
-          <ScalarProperty Name="ApprovalKind" ColumnName="ApprovalKind" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="LocationOther" ColumnName="LocationOther" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="Gate" ColumnName="Gate" />
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
-          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
-          <ScalarProperty Name="ApplicationType" ColumnName="ApplicationType" />
-          <ScalarProperty Name="Applicant" ColumnName="Applicant" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="VisitorCheckDaily">
       <EntityTypeMapping TypeName="PortalModel.VisitorCheckDaily">
         <MappingFragment StoreEntitySet="VisitorCheckDaily">
@@ -481,60 +448,6 @@
           <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
           <ScalarProperty Name="WorkDate" ColumnName="WorkDate" />
           <ScalarProperty Name="ApplicationDetail" ColumnName="ApplicationDetail" />
-          <ScalarProperty Name="ApplicationMaster" ColumnName="ApplicationMaster" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_GET" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_GET">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PortalModel.SP_VISITOR_APPLICATION_MASTER_GET_Result">
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="Applicant" ColumnName="Applicant" />
-          <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
-          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
-          <ScalarProperty Name="PurposeName" ColumnName="PurposeName" />
-          <ScalarProperty Name="Gate" ColumnName="Gate" />
-          <ScalarProperty Name="GateName" ColumnName="GateName" />
-          <ScalarProperty Name="ApplicationType" ColumnName="ApplicationType" />
-          <ScalarProperty Name="ApplicationTypeName" ColumnName="ApplicationTypeName" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
-          <ScalarProperty Name="ApprovalKind" ColumnName="ApprovalKind" />
-          <ScalarProperty Name="KindName" ColumnName="KindName" />
-          <ScalarProperty Name="ApprovalLineJson" ColumnName="ApprovalLineJson" />
-          <ScalarProperty Name="ApprovalLine" ColumnName="ApprovalLine" />
-          <ScalarProperty Name="ApprovalStatusName" ColumnName="ApprovalStatusName" />
-          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
-          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
-          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
-          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
-          <ScalarProperty Name="SectName" ColumnName="SectName" />
-          <ScalarProperty Name="LocationOther" ColumnName="LocationOther" />
-          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-          <ScalarProperty Name="ContactPhoneNumber" ColumnName="ContactPhoneNumber" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="HandPhoneNumber" ColumnName="HandPhoneNumber" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <EntitySetMapping Name="VisitorApplicationDetail">
-      <EntityTypeMapping TypeName="PortalModel.VisitorApplicationDetail">
-        <MappingFragment StoreEntitySet="VisitorApplicationDetail">
-          <ScalarProperty Name="IsWorkHourOfficial" ColumnName="IsWorkHourOfficial" />
-          <ScalarProperty Name="IsContactPerson" ColumnName="IsContactPerson" />
-          <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
-          <ScalarProperty Name="DriverPlate" ColumnName="DriverPlate" />
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="TemporaryCard" ColumnName="TemporaryCard" />
-          <ScalarProperty Name="IdentifyNo" ColumnName="IdentifyNo" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="ApplicationMaster" ColumnName="ApplicationMaster" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -581,6 +494,255 @@
           <ScalarProperty Name="SectName" ColumnName="SectName" />
           <ScalarProperty Name="CreateName" ColumnName="CreateName" />
           <ScalarProperty Name="PersonInChargeName" ColumnName="PersonInChargeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_INSERT" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_INSERT" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_UPDATE" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_UPDATE" />
+    <EntitySetMapping Name="Vendor">
+      <EntityTypeMapping TypeName="PortalModel.Vendor">
+        <MappingFragment StoreEntitySet="Vendor">
+          <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
+          <ScalarProperty Name="DeleteUid" ColumnName="DeleteUid" />
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="UpdateUId" ColumnName="UpdateUId" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="PersonInCharge" ColumnName="PersonInCharge" />
+          <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VisitorApplicationMaster">
+      <EntityTypeMapping TypeName="PortalModel.VisitorApplicationMaster">
+        <MappingFragment StoreEntitySet="VisitorApplicationMaster">
+          <ScalarProperty Name="Temp" ColumnName="Temp" />
+          <ScalarProperty Name="DeleteUid" ColumnName="DeleteUid" />
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="UpdateUId" ColumnName="UpdateUId" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ConfirmDate" ColumnName="ConfirmDate" />
+          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="ApprovalLineJson" ColumnName="ApprovalLineJson" />
+          <ScalarProperty Name="ApprovalLine" ColumnName="ApprovalLine" />
+          <ScalarProperty Name="ApprovalKind" ColumnName="ApprovalKind" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="LocationOther" ColumnName="LocationOther" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Gate" ColumnName="Gate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+          <ScalarProperty Name="HandPhoneNumber" ColumnName="HandPhoneNumber" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Applicant" ColumnName="Applicant" />
+          <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+          <ScalarProperty Name="ApplicationType" ColumnName="ApplicationType" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VisitorApplicationDetail">
+      <EntityTypeMapping TypeName="PortalModel.VisitorApplicationDetail">
+        <MappingFragment StoreEntitySet="VisitorApplicationDetail">
+          <ScalarProperty Name="DeleteUid" ColumnName="DeleteUid" />
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="UpdateUId" ColumnName="UpdateUId" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsWorkHourOfficial" ColumnName="IsWorkHourOfficial" />
+          <ScalarProperty Name="IsContactPerson" ColumnName="IsContactPerson" />
+          <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+          <ScalarProperty Name="DriverPlate" ColumnName="DriverPlate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="TemporaryCard" ColumnName="TemporaryCard" />
+          <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ApplicationMaster" ColumnName="ApplicationMaster" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_DETAIL_INSERT" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_DETAIL_INSERT" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_DETAIL_UPDATE" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_DETAIL_UPDATE" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_DETAIL_GET" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_DETAIL_GET">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PortalModel.SP_VISITOR_APPLICATION_DETAIL_GET_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ApplicationMaster" ColumnName="ApplicationMaster" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+          <ScalarProperty Name="TemporaryCard" ColumnName="TemporaryCard" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="DriverPlate" ColumnName="DriverPlate" />
+          <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+          <ScalarProperty Name="IsWorkHourOfficial" ColumnName="IsWorkHourOfficial" />
+          <ScalarProperty Name="VehicleTypeName" ColumnName="VehicleTypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_DETAIL_DELETE" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_DETAIL_DELETE" />
+    <FunctionImportMapping FunctionImportName="SP_APPROVAL_HISTORY" FunctionName="PortalModel.Store.SP_APPROVAL_HISTORY">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PortalModel.SP_APPROVAL_HISTORY_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="ApplicationMasterName" ColumnName="ApplicationMasterName" />
+          <ScalarProperty Name="ApplicationSubject" ColumnName="ApplicationSubject" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ApprovalLine" ColumnName="ApprovalLine" />
+          <ScalarProperty Name="ApprovalLineJson" ColumnName="ApprovalLineJson" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_UPDATE_ALLDATA" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_UPDATE_ALLDATA" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_GET_APPROVAL" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_GET_APPROVAL">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PortalModel.SP_VISITOR_APPLICATION_GET_APPROVAL_Result">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="ApproverType" ColumnName="ApproverType" />
+          <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="DateApprove" ColumnName="DateApprove" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+          <ScalarProperty Name="ApproverTypeName" ColumnName="ApproverTypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_DELETE" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_DELETE" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_GET" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_GET">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PortalModel.SP_VISITOR_APPLICATION_MASTER_GET_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Applicant" ColumnName="Applicant" />
+          <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="HandPhoneNumber" ColumnName="HandPhoneNumber" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+          <ScalarProperty Name="SectName" ColumnName="SectName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="PurposeName" ColumnName="PurposeName" />
+          <ScalarProperty Name="LocationOther" ColumnName="LocationOther" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Gate" ColumnName="Gate" />
+          <ScalarProperty Name="GateName" ColumnName="GateName" />
+          <ScalarProperty Name="ApplicationType" ColumnName="ApplicationType" />
+          <ScalarProperty Name="ApplicationTypeName" ColumnName="ApplicationTypeName" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="ApprovalKind" ColumnName="ApprovalKind" />
+          <ScalarProperty Name="KindName" ColumnName="KindName" />
+          <ScalarProperty Name="ApprovalLineJson" ColumnName="ApprovalLineJson" />
+          <ScalarProperty Name="ApprovalLine" ColumnName="ApprovalLine" />
+          <ScalarProperty Name="ApprovalStatusName" ColumnName="ApprovalStatusName" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
+          <ScalarProperty Name="NextApproverName" ColumnName="NextApproverName" />
+          <ScalarProperty Name="ConfirmDate" ColumnName="ConfirmDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
+          <ScalarProperty Name="CreateName" ColumnName="CreateName" />
+          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_APPROVE" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_APPROVE" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_CONFIRM" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_CONFIRM" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_RECALL" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_RECALL" />
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_GETDETAIL" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_GETDETAIL">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PortalModel.SP_VISITOR_APPLICATION_MASTER_GETDETAIL_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Applicant" ColumnName="Applicant" />
+          <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="HandPhoneNumber" ColumnName="HandPhoneNumber" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+          <ScalarProperty Name="SectName" ColumnName="SectName" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="PurposeName" ColumnName="PurposeName" />
+          <ScalarProperty Name="LocationOther" ColumnName="LocationOther" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Gate" ColumnName="Gate" />
+          <ScalarProperty Name="GateName" ColumnName="GateName" />
+          <ScalarProperty Name="ApplicationType" ColumnName="ApplicationType" />
+          <ScalarProperty Name="ApplicationTypeName" ColumnName="ApplicationTypeName" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="ApprovalKind" ColumnName="ApprovalKind" />
+          <ScalarProperty Name="KindName" ColumnName="KindName" />
+          <ScalarProperty Name="ApprovalLineJson" ColumnName="ApprovalLineJson" />
+          <ScalarProperty Name="ApprovalLine" ColumnName="ApprovalLine" />
+          <ScalarProperty Name="ApprovalStatusName" ColumnName="ApprovalStatusName" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
+          <ScalarProperty Name="NextApproverName" ColumnName="NextApproverName" />
+          <ScalarProperty Name="ConfirmDate" ColumnName="ConfirmDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
+          <ScalarProperty Name="CreateName" ColumnName="CreateName" />
+          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+          <ScalarProperty Name="IsRecall" ColumnName="IsRecall" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY" FunctionName="PortalModel.Store.SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PortalModel.SP_VISITOR_APPLICATION_MASTER_APPROVAL_HISTORY_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="ApprovalType" ColumnName="ApprovalType" />
+          <ScalarProperty Name="ApproverTypeName" ColumnName="ApproverTypeName" />
+          <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="DateApprove" ColumnName="DateApprove" />
+          <ScalarProperty Name="DateApproveFormat" ColumnName="DateApproveFormat" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

@@ -23,8 +23,11 @@ namespace SSO_Material.Models
     
         public int Id { get; set; }
         public string Code { get; set; }
+        public int ApplicationType { get; set; }
+        public int DeptId { get; set; }
         public string Applicant { get; set; }
-        public System.Guid ApplicationType { get; set; }
+        public string PhoneNumber { get; set; }
+        public string HandPhoneNumber { get; set; }
         public int Vendor { get; set; }
         public System.Guid Purpose { get; set; }
         public System.DateTime FromDate { get; set; }
@@ -33,10 +36,10 @@ namespace SSO_Material.Models
         public string Location { get; set; }
         public string LocationOther { get; set; }
         public string Remark { get; set; }
-        public System.Guid ApprovalKind { get; set; }
+        public Nullable<System.Guid> ApprovalKind { get; set; }
         public string ApprovalLine { get; set; }
         public string ApprovalLineJson { get; set; }
-        public System.Guid ApprovalStatus { get; set; }
+        public Nullable<System.Guid> ApprovalStatus { get; set; }
         public string NextApprover { get; set; }
         public Nullable<System.DateTime> ConfirmDate { get; set; }
         public System.DateTime CreateDate { get; set; }
@@ -45,10 +48,9 @@ namespace SSO_Material.Models
         public string UpdateUId { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
         public string DeleteUid { get; set; }
-        public int DeptId { get; set; }
-        public string PhoneNumber { get; set; }
-        public string HandPhoneNumber { get; set; }
+        public bool Temp { get; set; }
     
+        public virtual Vendor Vendor1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VisitorCheckDaily> VisitorCheckDaily { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

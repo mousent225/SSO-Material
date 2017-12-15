@@ -23,6 +23,8 @@ namespace SSO_Material
                          "~/Content/assets/js/libs/jquery-validation/dist/jquery.validate.min.js",
                          "~/Content/assets/js/libs/jquery-validation/dist/additional-methods.min.js",
                          "~/Content/assets/js/libs/bootstrap-datepicker/bootstrap-datepicker.js",
+                         "~/Content/assets/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js",
+                         "~/Content/assets/js/libs/wizard/jquery.bootstrap.wizard.min.js",
                          "~/Content/assets/js/libs/flot/jquery.flot.min.js",
                          "~/Content/assets/js/libs/flot/jquery.flot.time.min.js",
                          "~/Content/assets/js/libs/flot/jquery.flot.resize.min.js",
